@@ -8,6 +8,8 @@ class BitcoinApi {
       DateTime startDateSelected, DateTime endDateSelected) async {
          List<BitcoinData> bitcoinList = [];
 
+    startDateSelected = DateTime(startDateSelected.year, startDateSelected.month, startDateSelected.day);
+
     ////测试数据
     // var data = [
     //     {
@@ -62,6 +64,7 @@ class BitcoinApi {
       }
       return bitcoinList;
     } else {
+      EasyLoading.showError('Failed to load Bitcoin data');
       throw Exception('Failed to load Bitcoin data');
     }
   }

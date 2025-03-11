@@ -200,614 +200,620 @@ class _MYCardWidgetState extends State<MYCardWidget>
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         top: true,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      'r5mvnlaa' /* Wallet Balance */,
-                    ),
-                    style: FlutterFlowTheme.of(context).titleMedium.override(
-                          fontFamily: 'Lexend',
-                          letterSpacing: 0.0,
-                        ),
-                  ),
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed('AccountStatement');
-                    },
-                    child: Icon(
-                      Icons.download_sharp,
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      size: 24.0,
-                    ),
-                  ),
-                  Card(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    color: FlutterFlowTheme.of(context).primary,
-                    elevation: 2.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Container(
-                        width: 40.0,
-                        height: 40.0,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: Image.network(
-                          'https://picsum.photos/seed/750/600',
-                        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      FFLocalizations.of(context).getText(
+                        'r5mvnlaa' /* Wallet Balance */,
                       ),
+                      style: FlutterFlowTheme.of(context).titleMedium.override(
+                            fontFamily: 'Lexend',
+                            letterSpacing: 0.0,
+                          ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      'nq471rke' /* ≈$313,354,824.78 */,
-                    ),
-                    style: FlutterFlowTheme.of(context).headlineLarge.override(
-                          fontFamily: 'Poppins',
-                          letterSpacing: 0.0,
-                        ),
-                  ).animateOnPageLoad(
-                      animationsMap['textOnPageLoadAnimation1']!),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 11.0, 10.0, 0.0),
-                    child: InkWell(
+                    InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('MY_Card');
+                        context.pushNamed('AccountStatement');
                       },
                       child: Icon(
-                        Icons.refresh,
+                        Icons.download_sharp,
                         color: FlutterFlowTheme.of(context).primaryText,
-                        size: 30.0,
+                        size: 24.0,
                       ),
+                    ),
+                    Card(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      color: FlutterFlowTheme.of(context).primary,
+                      elevation: 2.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40.0),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Container(
+                          width: 40.0,
+                          height: 40.0,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.network(
+                            'https://picsum.photos/seed/750/600',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      FFLocalizations.of(context).getText(
+                        'nq471rke' /* ≈$313,354,824.78 */,
+                      ),
+                      style: FlutterFlowTheme.of(context).headlineLarge.override(
+                            fontFamily: 'Poppins',
+                            letterSpacing: 0.0,
+                          ),
                     ).animateOnPageLoad(
-                        animationsMap['iconOnPageLoadAnimation']!),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 0.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      'mwyxhlyf' /* 4 currencies */,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Lexend',
-                          color: FlutterFlowTheme.of(context).tertiary,
-                          letterSpacing: 0.0,
+                        animationsMap['textOnPageLoadAnimation1']!),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 11.0, 10.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('MY_Card');
+                        },
+                        child: Icon(
+                          Icons.refresh,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 30.0,
                         ),
-                  ),
-                ],
-              ),
-            ),
-            InkWell(
-              splashColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: () async {
-                context.pushNamed('CoinCap');
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.asset(
-                  'assets/images/jrsyz_.png',
-                  width: 359.0,
-                  height: 63.0,
-                  fit: BoxFit.cover,
+                      ).animateOnPageLoad(
+                          animationsMap['iconOnPageLoadAnimation']!),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsetsDirectional.fromSTEB(16.0, 11.0, 16.0, 12.0),
-              child: InkWell(
+              Padding(
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      FFLocalizations.of(context).getText(
+                        'mwyxhlyf' /* 4 currencies */,
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Lexend',
+                            color: FlutterFlowTheme.of(context).tertiary,
+                            letterSpacing: 0.0,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+              InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.pushNamed('BTCreceipt');
+                  context.pushNamed('CoinCap');
                 },
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        FlutterFlowTheme.of(context).errorRed,
-                        FlutterFlowTheme.of(context).primary
-                      ],
-                      stops: const [0.0, 1.0],
-                      begin: const AlignmentDirectional(1.0, -1.0),
-                      end: const AlignmentDirectional(-1.0, 1.0),
-                    ),
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            'wom3n7zb' /* BTC (5167.00) */,
-                          ),
-                          style: FlutterFlowTheme.of(context)
-                              .headlineSmall
-                              .override(
-                                fontFamily: 'Lexend',
-                                letterSpacing: 0.0,
-                                decoration: TextDecoration.underline,
-                              ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 8.0, 0.0, 0.0),
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  '3gy2tpo4' /* ≈$310,624,539.43 */,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .displaySmall
-                                    .override(
-                                      fontFamily: 'Lexend',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ).animateOnPageLoad(
-                                  animationsMap['textOnPageLoadAnimation2']!),
-                            ),
-                            Text(
-                              FFLocalizations.of(context).getText(
-                                'wwgeorvg' /* 99.13% >> */,
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Lexend',
-                                    color: const Color(0x7DEEEEEE),
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 12.0, 0.0, 0.0),
-                              child: LinearPercentIndicator(
-                                percent: 0.97,
-                                width: MediaQuery.sizeOf(context).width * 0.87,
-                                lineHeight: 20.0,
-                                animation: true,
-                                animateFromLastPercent: true,
-                                progressColor:
-                                    FlutterFlowTheme.of(context).textColor,
-                                backgroundColor: const Color(0x33F1F4F8),
-                                center: Text(
-                                  FFLocalizations.of(context).getText(
-                                    '9gqacxls' /*   */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Lexend',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                                barRadius: const Radius.circular(40.0),
-                                padding: EdgeInsets.zero,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.asset(
+                    'assets/images/jrsyz_.png',
+                    width: 359.0,
+                    height: 63.0,
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ).animateOnPageLoad(
-                  animationsMap['containerOnPageLoadAnimation1']!),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 12.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.pushNamed('ETHreceipt');
-                },
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        const Color(0xFF4B39EF),
-                        FlutterFlowTheme.of(context).primary
-                      ],
-                      stops: const [0.0, 1.0],
-                      begin: const AlignmentDirectional(1.0, -1.0),
-                      end: const AlignmentDirectional(-1.0, 1.0),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 11.0, 16.0, 12.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('BTCreceipt');
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          FlutterFlowTheme.of(context).errorRed,
+                          FlutterFlowTheme.of(context).primary
+                        ],
+                        stops: const [0.0, 1.0],
+                        begin: const AlignmentDirectional(1.0, -1.0),
+                        end: const AlignmentDirectional(-1.0, 1.0),
+                      ),
+                      borderRadius: BorderRadius.circular(16.0),
                     ),
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            'wcw6o7pv' /* ETH (0.00) */,
-                          ),
-                          style: FlutterFlowTheme.of(context)
-                              .headlineSmall
-                              .override(
-                                fontFamily: 'Lexend',
-                                letterSpacing: 0.0,
-                                decoration: TextDecoration.underline,
-                              ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 8.0, 0.0, 0.0),
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'i76i75h5' /* ≈$0.00 */,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            FFLocalizations.of(context).getText(
+                              'wom3n7zb' /* BTC (5167.00) */,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .headlineSmall
+                                .override(
+                                  fontFamily: 'Lexend',
+                                  letterSpacing: 0.0,
+                                  decoration: TextDecoration.underline,
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .displaySmall
-                                    .override(
-                                      fontFamily: 'Lexend',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ).animateOnPageLoad(
-                                  animationsMap['textOnPageLoadAnimation3']!),
-                            ),
-                            Text(
-                              FFLocalizations.of(context).getText(
-                                'r4rod5ll' /* 0.00% >> */,
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Lexend',
-                                    color: const Color(0x7DEEEEEE),
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 12.0, 0.0, 0.0),
-                              child: LinearPercentIndicator(
-                                percent: 0.02,
-                                width: MediaQuery.sizeOf(context).width * 0.87,
-                                lineHeight: 20.0,
-                                animation: true,
-                                animateFromLastPercent: true,
-                                progressColor:
-                                    FlutterFlowTheme.of(context).textColor,
-                                backgroundColor: const Color(0x33F1F4F8),
-                                center: Text(
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 8.0, 0.0, 0.0),
+                                child: Text(
                                   FFLocalizations.of(context).getText(
-                                    'olsewk5q' /*   */,
+                                    '3gy2tpo4' /* ≈$310,624,539.43 */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
+                                      .displaySmall
                                       .override(
                                         fontFamily: 'Lexend',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
                                         letterSpacing: 0.0,
                                       ),
-                                ),
-                                barRadius: const Radius.circular(40.0),
-                                padding: EdgeInsets.zero,
+                                ).animateOnPageLoad(
+                                    animationsMap['textOnPageLoadAnimation2']!),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ).animateOnPageLoad(
-                  animationsMap['containerOnPageLoadAnimation2']!),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.pushNamed('FGOLDreceipt');
-                },
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        FlutterFlowTheme.of(context).tertiary,
-                        const Color(0xFFEE8B60)
-                      ],
-                      stops: const [0.0, 1.0],
-                      begin: const AlignmentDirectional(1.0, -1.0),
-                      end: const AlignmentDirectional(-1.0, 1.0),
-                    ),
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            'pacm7vyb' /* FGOLD (0.00) */,
-                          ),
-                          style: FlutterFlowTheme.of(context)
-                              .headlineSmall
-                              .override(
-                                fontFamily: 'Lexend',
-                                letterSpacing: 0.0,
-                                decoration: TextDecoration.underline,
-                              ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 8.0, 0.0, 0.0),
-                              child: Text(
+                              Text(
                                 FFLocalizations.of(context).getText(
-                                  '14p7r0ko' /* ≈$0.00 */,
+                                  'wwgeorvg' /* 99.13% >> */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .displaySmall
+                                    .bodyMedium
                                     .override(
                                       fontFamily: 'Lexend',
+                                      color: const Color(0x7DEEEEEE),
                                       letterSpacing: 0.0,
                                     ),
-                              ).animateOnPageLoad(
-                                  animationsMap['textOnPageLoadAnimation4']!),
-                            ),
-                            Text(
-                              FFLocalizations.of(context).getText(
-                                'yzypdycw' /* 0.00% >> */,
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Lexend',
-                                    color: const Color(0x7DEEEEEE),
-                                    letterSpacing: 0.0,
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 12.0, 0.0, 0.0),
+                                  child: LinearPercentIndicator(
+                                    percent: 0.97,
+                                    lineHeight: 20.0,
+                                    animation: true,
+                                    animateFromLastPercent: true,
+                                    progressColor:
+                                        FlutterFlowTheme.of(context).textColor,
+                                    backgroundColor: const Color(0x33F1F4F8),
+                                    center: Text(
+                                      FFLocalizations.of(context).getText(
+                                        '9gqacxls' /*   */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Lexend',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                    barRadius: const Radius.circular(40.0),
+                                    padding: EdgeInsets.zero,
                                   ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ).animateOnPageLoad(
+                    animationsMap['containerOnPageLoadAnimation1']!),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 12.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('ETHreceipt');
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          const Color(0xFF4B39EF),
+                          FlutterFlowTheme.of(context).primary
+                        ],
+                        stops: const [0.0, 1.0],
+                        begin: const AlignmentDirectional(1.0, -1.0),
+                        end: const AlignmentDirectional(-1.0, 1.0),
+                      ),
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            FFLocalizations.of(context).getText(
+                              'wcw6o7pv' /* ETH (0.00) */,
                             ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 12.0, 0.0, 0.0),
-                              child: LinearPercentIndicator(
-                                percent: 0.02,
-                                width: MediaQuery.sizeOf(context).width * 0.87,
-                                lineHeight: 20.0,
-                                animation: true,
-                                animateFromLastPercent: true,
-                                progressColor:
-                                    FlutterFlowTheme.of(context).textColor,
-                                backgroundColor: const Color(0x33F1F4F8),
-                                center: Text(
+                            style: FlutterFlowTheme.of(context)
+                                .headlineSmall
+                                .override(
+                                  fontFamily: 'Lexend',
+                                  letterSpacing: 0.0,
+                                  decoration: TextDecoration.underline,
+                                ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 8.0, 0.0, 0.0),
+                                child: Text(
                                   FFLocalizations.of(context).getText(
-                                    'zfjlri1j' /*   */,
+                                    'i76i75h5' /* ≈$0.00 */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
+                                      .displaySmall
                                       .override(
                                         fontFamily: 'Lexend',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
                                         letterSpacing: 0.0,
                                       ),
-                                ),
-                                barRadius: const Radius.circular(40.0),
-                                padding: EdgeInsets.zero,
+                                ).animateOnPageLoad(
+                                    animationsMap['textOnPageLoadAnimation3']!),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ).animateOnPageLoad(
-                  animationsMap['containerOnPageLoadAnimation3']!),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsetsDirectional.fromSTEB(16.0, 11.0, 16.0, 14.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.pushNamed('USDTreceipt');
-                },
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        const Color(0xFF4B39EF),
-                        FlutterFlowTheme.of(context).primary
-                      ],
-                      stops: const [0.0, 1.0],
-                      begin: const AlignmentDirectional(1.0, -1.0),
-                      end: const AlignmentDirectional(-1.0, 1.0),
-                    ),
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            'v2lxypw4' /* USDT(OMNI) (2,730,285) */,
-                          ),
-                          style: FlutterFlowTheme.of(context)
-                              .headlineSmall
-                              .override(
-                                fontFamily: 'Lexend',
-                                letterSpacing: 0.0,
-                                decoration: TextDecoration.underline,
-                              ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 8.0, 0.0, 0.0),
-                              child: Text(
+                              Text(
                                 FFLocalizations.of(context).getText(
-                                  '59ps06z3' /* ≈$2,730,285.35 */,
+                                  'r4rod5ll' /* 0.00% >> */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .displaySmall
+                                    .bodyMedium
                                     .override(
                                       fontFamily: 'Lexend',
+                                      color: const Color(0x7DEEEEEE),
                                       letterSpacing: 0.0,
                                     ),
-                              ).animateOnPageLoad(
-                                  animationsMap['textOnPageLoadAnimation5']!),
-                            ),
-                            Text(
-                              FFLocalizations.of(context).getText(
-                                'umqxwcm5' /* 0.87% >> */,
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Lexend',
-                                    color: const Color(0x7DEEEEEE),
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 12.0, 0.0, 0.0),
-                              child: LinearPercentIndicator(
-                                percent: 0.087,
-                                width: MediaQuery.sizeOf(context).width * 0.87,
-                                lineHeight: 20.0,
-                                animation: true,
-                                animateFromLastPercent: true,
-                                progressColor:
-                                    FlutterFlowTheme.of(context).textColor,
-                                backgroundColor: const Color(0x33F1F4F8),
-                                center: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'l2cndxsg' /*   */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Lexend',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        letterSpacing: 0.0,
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 12.0, 0.0, 0.0),
+                                  child: LinearPercentIndicator(
+                                    percent: 0.02,
+                                    lineHeight: 20.0,
+                                    animation: true,
+                                    animateFromLastPercent: true,
+                                    progressColor:
+                                        FlutterFlowTheme.of(context).textColor,
+                                    backgroundColor: const Color(0x33F1F4F8),
+                                    center: Text(
+                                      FFLocalizations.of(context).getText(
+                                        'olsewk5q' /*   */,
                                       ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Lexend',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                    barRadius: const Radius.circular(40.0),
+                                    padding: EdgeInsets.zero,
+                                  ),
                                 ),
-                                barRadius: const Radius.circular(40.0),
-                                padding: EdgeInsets.zero,
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ).animateOnPageLoad(
-                  animationsMap['containerOnPageLoadAnimation4']!),
-            ),
-          ],
+                ).animateOnPageLoad(
+                    animationsMap['containerOnPageLoadAnimation2']!),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('FGOLDreceipt');
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          FlutterFlowTheme.of(context).tertiary,
+                          const Color(0xFFEE8B60)
+                        ],
+                        stops: const [0.0, 1.0],
+                        begin: const AlignmentDirectional(1.0, -1.0),
+                        end: const AlignmentDirectional(-1.0, 1.0),
+                      ),
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            FFLocalizations.of(context).getText(
+                              'pacm7vyb' /* FGOLD (0.00) */,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .headlineSmall
+                                .override(
+                                  fontFamily: 'Lexend',
+                                  letterSpacing: 0.0,
+                                  decoration: TextDecoration.underline,
+                                ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 8.0, 0.0, 0.0),
+                                child: Text(
+                                  FFLocalizations.of(context).getText(
+                                    '14p7r0ko' /* ≈$0.00 */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .displaySmall
+                                      .override(
+                                        fontFamily: 'Lexend',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ).animateOnPageLoad(
+                                    animationsMap['textOnPageLoadAnimation4']!),
+                              ),
+                              Text(
+                                FFLocalizations.of(context).getText(
+                                  'yzypdycw' /* 0.00% >> */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Lexend',
+                                      color: const Color(0x7DEEEEEE),
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 12.0, 0.0, 0.0),
+                                  child: LinearPercentIndicator(
+                                    percent: 0.02,
+                                    lineHeight: 20.0,
+                                    animation: true,
+                                    animateFromLastPercent: true,
+                                    progressColor:
+                                      FlutterFlowTheme.of(context).textColor,
+                                  backgroundColor: const Color(0x33F1F4F8),
+                                  center: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'zfjlri1j' /*   */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Lexend',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  barRadius: const Radius.circular(40.0),
+                                    padding: EdgeInsets.zero,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ).animateOnPageLoad(
+                    animationsMap['containerOnPageLoadAnimation3']!),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 11.0, 16.0, 14.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('USDTreceipt');
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          const Color(0xFF4B39EF),
+                          FlutterFlowTheme.of(context).primary
+                        ],
+                        stops: const [0.0, 1.0],
+                        begin: const AlignmentDirectional(1.0, -1.0),
+                        end: const AlignmentDirectional(-1.0, 1.0),
+                      ),
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            FFLocalizations.of(context).getText(
+                              'v2lxypw4' /* USDT(OMNI) (2,730,285) */,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .headlineSmall
+                                .override(
+                                  fontFamily: 'Lexend',
+                                  letterSpacing: 0.0,
+                                  decoration: TextDecoration.underline,
+                                ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 8.0, 0.0, 0.0),
+                                child: Text(
+                                  FFLocalizations.of(context).getText(
+                                    '59ps06z3' /* ≈$2,730,285.35 */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .displaySmall
+                                      .override(
+                                        fontFamily: 'Lexend',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ).animateOnPageLoad(
+                                    animationsMap['textOnPageLoadAnimation5']!),
+                              ),
+                              Text(
+                                FFLocalizations.of(context).getText(
+                                  'umqxwcm5' /* 0.87% >> */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Lexend',
+                                      color: const Color(0x7DEEEEEE),
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 12.0, 0.0, 0.0),
+                                  child: LinearPercentIndicator(
+                                  percent: 0.087,
+                                  lineHeight: 20.0,
+                                  animation: true,
+                                  animateFromLastPercent: true,
+                                  progressColor:
+                                      FlutterFlowTheme.of(context).textColor,
+                                  backgroundColor: const Color(0x33F1F4F8),
+                                  center: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'l2cndxsg' /*   */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Lexend',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  barRadius: const Radius.circular(40.0),
+                                    padding: EdgeInsets.zero,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ).animateOnPageLoad(
+                    animationsMap['containerOnPageLoadAnimation4']!),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -79,8 +79,7 @@ class _DateRangePickerState extends State<DateRangePicker> {
     if (widget.initialStartDate != null && widget.initialEndDate != null) {
       selectedDateRange = DateTimeRange(
         start: widget.initialStartDate!,
-        end: widget.initialEndDate!
-            .add(Duration(hours: 23, minutes: 59, seconds: 59)),
+        end: widget.initialEndDate!,
       );
     }
   }

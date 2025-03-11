@@ -247,9 +247,49 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
 
             // Sixth Row: Bitcoin Data List
             pw.ListView.builder(
-              itemCount: bitcoinData.length,
+              itemCount: bitcoinData.length + 1,
               itemBuilder: (context, index) {
-                final item = bitcoinData[index];
+                if (index == 0) {
+                  return pw.Container(
+                    padding: const pw.EdgeInsets.only(top: 6, bottom: 5),
+                    decoration: const pw.BoxDecoration(
+                      border: pw.Border(
+                        bottom:
+                            pw.BorderSide(color: PdfColors.black, width: 0.5),
+                      ),
+                    ),
+                    child: pw.Row(
+                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                      children: [
+                        pw.Text(
+                          "TIME",
+                          style: pw.TextStyle(
+                            fontSize: 8,
+                            fontWeight: pw.FontWeight.normal,
+                          ),
+                        ),
+                        pw.Container(
+                          margin: pw.EdgeInsets.only(right: 40),
+                          child: pw.Text(
+                            'AMOUNT (BTC)',
+                            style: pw.TextStyle(
+                              fontSize: 8,
+                              fontWeight: pw.FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                        pw.Text(
+                          'AMOUNT (USD)',
+                          style: pw.TextStyle(
+                            fontSize: 8,
+                            fontWeight: pw.FontWeight.normal,
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                }
+                final item = bitcoinData[index - 1];
                 return pw.Container(
                   padding: const pw.EdgeInsets.only(top: 6, bottom: 5),
                   decoration: const pw.BoxDecoration(
@@ -365,7 +405,10 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
 
     // 生成并保存为文件
     //生成的pdf名称替换为WALLET STATEMENT#1-1231（最后的4位数字是用户选择的日期，前面的文本“WALLET STATEMENT#1-”固定不变~）
-    await Printing.sharePdf(bytes: await pdf.save(), filename: "WALLET STATEMENT#1-${DateFormat('MMdd').format(DateTime.now())}.pdf");
+    await Printing.sharePdf(
+        bytes: await pdf.save(),
+        filename:
+            "WALLET STATEMENT#1-${DateFormat('MMdd').format(DateTime.now())}.pdf");
   }
 
   // 获取当前日期
@@ -531,15 +574,19 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                             //   context.pushNamed('AccountStatement');
                             // }
 
-                            if (!DateSelectionPage.isDateRangeValid(
-                                context, startDate, endDate)) {
-                              return;
+                            // if (!DateSelectionPage.isDateRangeValid(
+                            //     context, startDate, endDate)) {
+                            //   return;
+                            // }
+                            try {
+                              Future<List<BitcoinData>> futureBitcoinData =
+                                  BitcoinApi.fetchBitcoinHistory(
+                                      startDate, endDate);
+                              futureBitcoinData.then((value) =>
+                                  _generateAndDownloadPdf(value, context));
+                            } catch (e) {
+                              print(e);
                             }
-                            Future<List<BitcoinData>> futureBitcoinData =
-                                BitcoinApi.fetchBitcoinHistory(
-                                    startDate, endDate);
-                            futureBitcoinData.then((value) =>
-                                _generateAndDownloadPdf(value, context));
                             // 解析 JSON 数据
 
                             safeSetState(() {});
