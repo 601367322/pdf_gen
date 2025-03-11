@@ -1,0 +1,25 @@
+
+# FVM Version Cache
+.fvm/
+
+.DS_Store
+.dart_tool/
+
+.packages
+.pub/
+.idea
+.metadata
+*.log
+.vscode/
+
+pubspec.lock
+
+build/
+
+.flutter-plugins
+Podfile.lock
+flutter_export_environment.sh
+.flutter-plugins-dependencies
+
+# FVM Version Cache
+.fvm/
