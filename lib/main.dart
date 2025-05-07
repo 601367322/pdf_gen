@@ -90,7 +90,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Cryvo Wallet',
+      title: 'B-Wallet',
       localizationsDelegates: const [
         FFLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -147,7 +147,6 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'MY_Card': const MYCardWidget(),
-      'CoinCap': const CoinCapWidget(),
       'MY_profilePage': const MYProfilePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -181,20 +180,7 @@ class _NavBarPageState extends State<NavBarPage> {
             ),
             tooltip: '',
           ),
-          BottomNavigationBarItem(
-            icon: const Icon(
-              Icons.stacked_line_chart_rounded,
-              size: 24.0,
-            ),
-            activeIcon: const Icon(
-              Icons.stacked_line_chart_rounded,
-              size: 24.0,
-            ),
-            label: FFLocalizations.of(context).getText(
-              'ofz2zvlc' /* • */,
-            ),
-            tooltip: '',
-          ),
+         
           BottomNavigationBarItem(
             icon: const Icon(
               Icons.account_circle_outlined,

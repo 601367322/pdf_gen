@@ -1,4 +1,5 @@
 import 'package:nxtt_wallet/pages/m_y_card/card_detail.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -30,17 +31,76 @@ class MockData {
     };
   }
 
-  MockData({required this.icon, required this.name, required this.description, required this.value, required this.approximately});    
+  MockData(
+      {required this.icon,
+      required this.name,
+      required this.description,
+      required this.value,
+      required this.approximately});
+
+  static Future<List<MockData>> generateMockData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var email = prefs.getString('email') ?? '';
+    var _mockData = mockData;
+    if (email == 'oliver00711@163.com') {
+      _mockData[0].value = '333.00203054';
+      _mockData[0].approximately = '≈\$333.00(USD)';
+    } else if (email == 'lucas19951@163.com') {
+      _mockData[0].value = '500.19479210';
+      _mockData[0].approximately = '≈\$500.19(USD)';
+    } else if (email == 'emma2026@tutamail.com') {
+      _mockData[0].value = '5000.00023285';
+      _mockData[0].approximately = '≈\$5000.00(USD)';
+    }
+    return _mockData;
+  }
+
   static List<MockData> mockData = [
-    MockData(icon: "assets/images/btc2@2x.png", name: "BTC", description: "Bitcoin", value: "0.00", approximately: "≈\$0.00(USD)"),
-    MockData(icon: "assets/images/eth2@2x.png", name: "ETH", description: "Ethereum", value: "0.00", approximately: "≈\$0.00(USD)"),
-    MockData(icon: "assets/images/tether2@2x.png", name: "USDT", description: "Tether", value: "0.00", approximately: "≈\$0.00(USD)"),
-    MockData(icon: "assets/images/xrp2@2x.png", name: "XRP", description: "XRP", value: "0.00", approximately: "≈\$0.00(USD)"),
-    MockData(icon: "assets/images/bnb3@2x.png", name: "BNB", description: "BNB", value: "0.00", approximately: "≈\$0.00(USD)"),
-    MockData(icon: "assets/images/sol2@2x.png", name: "SOL", description: "Solana", value: "0.00", approximately: "≈\$0.00(USD)"),
-    MockData(icon: "assets/images/usdc3@2x.png", name: "USDC", description: "USDC", value: "0.00", approximately: "≈\$0.00(USD)"),
+    MockData(
+        icon: "assets/images/btc2@2x.png",
+        name: "BTC",
+        description: "Bitcoin",
+        value: "0.00",
+        approximately: "≈\$0.00(USD)"),
+    MockData(
+        icon: "assets/images/eth2@2x.png",
+        name: "ETH",
+        description: "Ethereum",
+        value: "0.00",
+        approximately: "≈\$0.00(USD)"),
+    MockData(
+        icon: "assets/images/tether2@2x.png",
+        name: "USDT",
+        description: "Tether",
+        value: "0.00",
+        approximately: "≈\$0.00(USD)"),
+    MockData(
+        icon: "assets/images/xrp2@2x.png",
+        name: "XRP",
+        description: "XRP",
+        value: "0.00",
+        approximately: "≈\$0.00(USD)"),
+    MockData(
+        icon: "assets/images/bnb3@2x.png",
+        name: "BNB",
+        description: "BNB",
+        value: "0.00",
+        approximately: "≈\$0.00(USD)"),
+    MockData(
+        icon: "assets/images/sol2@2x.png",
+        name: "SOL",
+        description: "Solana",
+        value: "0.00",
+        approximately: "≈\$0.00(USD)"),
+    MockData(
+        icon: "assets/images/usdc3@2x.png",
+        name: "USDC",
+        description: "USDC",
+        value: "0.00",
+        approximately: "≈\$0.00(USD)"),
   ];
 }
+
 class MYCardWidget extends StatefulWidget {
   const MYCardWidget({super.key});
 
@@ -57,12 +117,19 @@ class _MYCardWidgetState extends State<MYCardWidget>
   bool _hideSmallCoins = false;
   bool _hideShowCoins = false;
 
+  List<MockData> _mockData = [];
+
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => MYCardModel());
-
+    _loadMockData();
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+  }
+
+  Future<void> _loadMockData() async {
+    _mockData = await MockData.generateMockData();
+    setState(() {});
   }
 
   @override
@@ -127,8 +194,10 @@ class _MYCardWidgetState extends State<MYCardWidget>
                     shape: BoxShape.circle,
                   ),
                   child: ClipOval(
-                    child: Image.network(
-                      'https://picsum.photos/seed/750/600',
+                    child: Image.asset(
+                      'assets/images/avatar.png',
+                      width: 80,
+                      height: 80,
                     ),
                   ),
                 ),
@@ -173,7 +242,9 @@ class _MYCardWidgetState extends State<MYCardWidget>
                     hideShowCoins();
                   },
                   child: Icon(
-                    _hideShowCoins ? Icons.remove_red_eye : Icons.remove_red_eye_outlined,
+                    _hideShowCoins
+                        ? Icons.remove_red_eye
+                        : Icons.remove_red_eye_outlined,
                     color: Colors.white.withAlpha(200),
                   ),
                 ),
@@ -192,7 +263,9 @@ class _MYCardWidgetState extends State<MYCardWidget>
                     hideSmallCoins();
                   },
                   child: Icon(
-                    _hideSmallCoins ? Icons.check_box : Icons.check_box_outline_blank,
+                    _hideSmallCoins
+                        ? Icons.check_box
+                        : Icons.check_box_outline_blank,
                     color: Colors.white,
                   ),
                 ),
@@ -228,8 +301,8 @@ class _MYCardWidgetState extends State<MYCardWidget>
     return Expanded(
       child: ListView.separated(
         padding: EdgeInsets.zero,
-        itemCount: MockData.mockData.length,
-        itemBuilder: (context, index) => _buildItem(MockData.mockData[index]),
+        itemCount: _mockData.length,
+        itemBuilder: (context, index) => _buildItem(_mockData[index]),
         separatorBuilder: (context, index) => const Divider(
           height: 1,
           color: Color(0xff4c4d56),
@@ -241,7 +314,8 @@ class _MYCardWidgetState extends State<MYCardWidget>
   _buildItem(MockData item) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => CardDetail(item: item)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => CardDetail(item: item)));
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 25),

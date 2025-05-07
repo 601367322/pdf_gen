@@ -149,9 +149,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // loginPage
   {
     'z2h8w11t': {
-      'en': 'Cryvo Wallet',
+      'en': 'B-Wallet',
       'ar': 'محفظة NXTT',
-      'zh_Hans': 'Cryvo Wallet',
+      'zh_Hans': 'B-Wallet',
       'zh_Hant': 'NXTT錢包',
     },
     'o07j3mgv': {
@@ -2243,9 +2243,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hant': '注意：此地址僅支援BTC交易，請勿使用其他幣種。',
     },
     's5sv586m': {
-      'en': 'Cryvo Wallet',
+      'en': 'B-Wallet',
       'ar': 'محفظة NXTT',
-      'zh_Hans': 'Cryvo Wallet',
+      'zh_Hans': 'B-Wallet',
       'zh_Hant': 'NXTT錢包',
     },
     'hi76zons': {
@@ -2284,9 +2284,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hant': '注意：此地址僅支援ETH交易，請勿使用其他幣種。',
     },
     '15jlvqis': {
-      'en': 'Cryvo Wallet',
+      'en': 'B-Wallet',
       'ar': 'محفظة NXTT',
-      'zh_Hans': 'Cryvo Wallet',
+      'zh_Hans': 'B-Wallet',
       'zh_Hant': 'NXTT錢包',
     },
     '4ray4fgo': {
@@ -2325,9 +2325,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hant': '注意：該地址僅支援FGOLD交易，請勿使用其他幣種。',
     },
     'u3v37ndx': {
-      'en': 'Cryvo Wallet',
+      'en': 'B-Wallet',
       'ar': 'محفظة NXTT',
-      'zh_Hans': 'Cryvo Wallet',
+      'zh_Hans': 'B-Wallet',
       'zh_Hant': 'NXTT錢包',
     },
     'dgidxazd': {
@@ -2366,9 +2366,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hant': '注意：此地址僅支援USDT(OMNI)交易，請勿使用其他幣種。',
     },
     'i3ghcbxf': {
-      'en': 'Cryvo Wallet',
+      'en': 'B-Wallet',
       'ar': 'محفظة NXTT',
-      'zh_Hans': 'Cryvo Wallet',
+      'zh_Hans': 'B-Wallet',
       'zh_Hant': 'NXTT錢包',
     },
     'j4sen6c0': {

@@ -26,13 +26,14 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
 
     _model.emailAddressTextController ??= TextEditingController();
     _model.emailAddressFocusNode ??= FocusNode();
-
+    // _model.emailAddressTextController?.text = 'emma2026@tutamail.com';
     _model.passwordCreateTextController ??= TextEditingController();
     _model.passwordCreateFocusNode ??= FocusNode();
+    // _model.passwordCreateTextController?.text = 'emma5000';
 
     _model.passwordConfirmTextController ??= TextEditingController();
     _model.passwordConfirmFocusNode ??= FocusNode();
-
+    // _model.passwordConfirmTextController?.text = 'emma5000';
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 

@@ -2,51 +2,72 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nxtt_wallet/flutter_flow/bitcoin_data.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BitcoinApi {
   static Future<List<BitcoinData>> fetchBitcoinHistory(
       DateTime startDateSelected, DateTime endDateSelected) async {
-         List<BitcoinData> bitcoinList = [];
+    List<BitcoinData> bitcoinList = [];
 
-    startDateSelected = DateTime(startDateSelected.year, startDateSelected.month, startDateSelected.day);
-
+    startDateSelected = DateTime(
+        startDateSelected.year, startDateSelected.month, startDateSelected.day);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? email = prefs.getString('email');
     ////测试数据
-    // var data = [
-    //     {
-    //       "priceUsd": "84710.2990925394714345",
-    //       "time": 1741046400000,
-    //       "date": "2025-03-04T00:00:00.000Z"
-    //     },
-    //     {
-    //       "priceUsd": "88696.6820415918272818",
-    //       "time": 1741132800000,
-    //       "date": "2025-03-05T00:00:00.000Z"
-    //     },
-    //     {
-    //       "priceUsd": "90544.8105914688930779",
-    //       "time": 1741219200000,
-    //       "date": "2025-03-06T00:00:00.000Z"
-    //     },
-    //     {
-    //       "priceUsd": "88054.3611483335331366",
-    //       "time": 1741305600000,
-    //       "date": "2025-03-07T00:00:00.000Z"
-    //     },
-    //     {
-    //       "priceUsd": "86200.6929262576152838",
-    //       "time": 1741392000000,
-    //       "date": "2025-03-08T00:00:00.000Z"
-    //     },
-    //     {
-    //       "priceUsd": "84387.2463997152197322",
-    //       "time": 1741478400000,
-    //       "date": "2025-03-09T00:00:00.000Z"
-    //     }
-    //   ];
-    // data.forEach((element) {
-    //   bitcoinList.add(BitcoinData.fromJson(element));
-    // });
-    // return bitcoinList;
+    var data = [];
+    if (email != null) {
+      if (email == 'oliver00711@163.com') {
+        data = [
+          {
+            "priceUsd": "31,255,237.58",
+            "time": DateTime.now().millisecondsSinceEpoch,
+            "number": "333.00203054"
+          },
+          {
+            "priceUsd": "27,499,973.69",
+            "time": DateTime.now()
+                .subtract(Duration(days: 1))
+                .millisecondsSinceEpoch,
+            "number": "333.00203054"
+          },
+        ];
+      } else if (email == 'lucas19951@163.com') {
+        data = [
+          {
+            "priceUsd": "46,947,782.99",
+            "time": DateTime.now().millisecondsSinceEpoch,
+            "number": "500.19479210"
+          },
+          {
+            "priceUsd": "41,307,086.32",
+            "time": DateTime.now()
+                .subtract(Duration(days: 1))
+                .millisecondsSinceEpoch,
+            "number": "500.19479210"
+          },
+        ];
+      } else if (email == 'emma2026@tutamail.com') {
+        data = [
+          {
+            "priceUsd": "469,295.218.56",
+            "time": DateTime.now().millisecondsSinceEpoch,
+            "number": "5000.00023285"
+          },
+          {
+            "priceUsd": "412,910,192,30",
+            "time": DateTime.now()
+                .subtract(Duration(days: 1))
+                .millisecondsSinceEpoch,
+            "number": "5000.00023285"
+          },
+        ];
+      }
+      data.forEach((element) {
+        bitcoinList.add(BitcoinData.fromJson(element));
+      });
+      return bitcoinList;
+    }
+
     int startTimestamp = startDateSelected.millisecondsSinceEpoch;
     int endTimestamp = endDateSelected.millisecondsSinceEpoch;
     EasyLoading.show(status: 'Downloading...'); // 显示加载动画

@@ -209,7 +209,7 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
                               print('Button pressed ...');
                             },
                             text: FFLocalizations.of(context).getText(
-                              's5sv586m' /* Cryvo Wallet */,
+                              's5sv586m' /* B-Wallet */,
                             ),
                             options: FFButtonOptions(
                               width: 300.0,

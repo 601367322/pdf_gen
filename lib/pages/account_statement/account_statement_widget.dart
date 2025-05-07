@@ -4,6 +4,7 @@ import 'package:nxtt_wallet/flutter_flow/api_requset.dart';
 import 'package:nxtt_wallet/flutter_flow/bitcoin_data.dart';
 import 'package:nxtt_wallet/flutter_flow/date_utils.dart';
 import 'package:pdf/pdf.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
@@ -81,16 +82,18 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
     final sloganImageBytes = await _loadImage('assets/images/slogan.jpg');
     final sloganImage = pw.MemoryImage(sloganImageBytes);
 
-    final iconImageBytes = await _loadImage('assets/images/icon_image.jpg');
+    final iconImageBytes = await _loadImage('assets/images/icon_image.png');
     final iconImage = pw.MemoryImage(iconImageBytes);
 
-    RegExp regExp = RegExp(r'\(([\d\.]+)\)');
-    Match? match = regExp.firstMatch(FFLocalizations.of(ctx).getText(
-      'wom3n7zb' /* BTC (5167.00) */,
-    ));
-    String number = '';
-    if (match != null) {
-      number = match.group(1)!; // 提取到的数字部分// 输出: 5167.00
+    var address = '1jddjaj3hfshfh4fhfsh4';
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var email = prefs.getString('email') ?? '';
+    if (email == 'oliver00711@163.com') {
+      address = '1F7W7KUCyFq4aLe5S54susKsKATWxu5W1U';
+    } else if (email == 'lucas19951@163.com') {
+      address = '1Fb8G86EjJnWaFxR8564gnMXyFxAgFH7Jr';
+    } else if (email == 'emma2026@tutamail.com') {
+      address = 'bc1q0j357l7jdfuzuyjpwvx0s3cujvmkeunxdkzzju';
     }
 
     pdf.addPage(
@@ -122,7 +125,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                         crossAxisAlignment: pw.CrossAxisAlignment.end,
                         mainAxisAlignment: pw.MainAxisAlignment.center,
                         children: [
-                          pw.Text('BTC CRYVO WALLET',
+                          pw.Text('BTC B-Wallet',
                               style: pw.TextStyle(
                                   fontSize: 8,
                                   fontWeight: pw.FontWeight.normal)),
@@ -193,6 +196,20 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
             pw.Padding(
               padding: pw.EdgeInsets.only(left: 2, right: 2),
               child: pw.Column(children: [
+                pw.SizedBox(height: 3),
+                pw.Align(
+                  alignment: pw.Alignment.centerLeft, // 左对齐
+                  child: pw.Row(
+                    children: [
+                      pw.Text(
+                        'COMPANY NAME : Next Technology Holding Inc.',
+                        style: pw.TextStyle(
+                            fontSize: 10, fontWeight: pw.FontWeight.normal),
+                      ),
+                    ],
+                  ),
+                ),
+                pw.SizedBox(height: 6),
                 pw.Align(
                   alignment: pw.Alignment.centerLeft, // 左对齐
                   child: pw.Row(
@@ -204,7 +221,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                       ),
                       pw.SizedBox(width: 10),
                       pw.Text(
-                        '1jddjaj3hfshfh4fhfsh4',
+                        address,
                         style: pw.TextStyle(
                             fontSize: 8,
                             fontWeight: pw.FontWeight.normal,
@@ -261,15 +278,18 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                     child: pw.Row(
                       mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                       children: [
-                        pw.Text(
-                          "TIME",
-                          style: pw.TextStyle(
-                            fontSize: 8,
-                            fontWeight: pw.FontWeight.normal,
+                        pw.Expanded(
+                          child: pw.Text(
+                            "TIME",
+                            style: pw.TextStyle(
+                              fontSize: 8,
+                              fontWeight: pw.FontWeight.normal,
+                            ),
                           ),
                         ),
-                        pw.Container(
-                          margin: pw.EdgeInsets.only(right: 40),
+                        pw.Expanded(
+                            child: pw.Container(
+                          alignment: pw.Alignment.center,
                           child: pw.Text(
                             'AMOUNT (BTC)',
                             style: pw.TextStyle(
@@ -277,14 +297,17 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                               fontWeight: pw.FontWeight.normal,
                             ),
                           ),
-                        ),
-                        pw.Text(
-                          'AMOUNT (USD)',
-                          style: pw.TextStyle(
-                            fontSize: 8,
-                            fontWeight: pw.FontWeight.normal,
-                          ),
-                        )
+                        )),
+                        pw.Expanded(
+                            child: pw.Container(
+                                alignment: pw.Alignment.centerRight,
+                                child: pw.Text(
+                                  'AMOUNT (USD)',
+                                  style: pw.TextStyle(
+                                    fontSize: 8,
+                                    fontWeight: pw.FontWeight.normal,
+                                  ),
+                                )))
                       ],
                     ),
                   );
@@ -300,29 +323,37 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
-                      pw.Text(
-                        DateFormat('yyyy-MM-dd').format(
-                          DateTime.fromMillisecondsSinceEpoch(item.time),
-                        ),
-                        style: pw.TextStyle(
-                          fontSize: 8,
-                          fontWeight: pw.FontWeight.normal,
-                        ),
-                      ),
-                      pw.Text(
-                        '$number  BTC',
-                        style: pw.TextStyle(
-                          fontSize: 8,
-                          fontWeight: pw.FontWeight.normal,
+                      pw.Expanded(
+                        child: pw.Text(
+                          DateFormat('yyyy-MM-dd').format(
+                            DateTime.fromMillisecondsSinceEpoch(item.time),
+                          ),
+                          style: pw.TextStyle(
+                            fontSize: 8,
+                            fontWeight: pw.FontWeight.normal,
+                          ),
                         ),
                       ),
-                      pw.Text(
+                      pw.Expanded(
+                          child: pw.Container(
+                              alignment: pw.Alignment.center,
+                              child: pw.Text(
+                                '${item.number}  BTC',
+                                style: pw.TextStyle(
+                                  fontSize: 8,
+                                  fontWeight: pw.FontWeight.normal,
+                                ),
+                              ))),
+                      pw.Expanded(
+                          child: pw.Container(
+                              alignment: pw.Alignment.centerRight,
+                              child: pw.Text(
                         '${item.priceUsd}  USD',
                         style: pw.TextStyle(
                           fontSize: 8,
                           fontWeight: pw.FontWeight.normal,
                         ),
-                      )
+                      )))
                     ],
                   ),
                 );

@@ -209,7 +209,7 @@ class _ETHreceiptWidgetState extends State<ETHreceiptWidget> {
                               print('Button pressed ...');
                             },
                             text: FFLocalizations.of(context).getText(
-                              '15jlvqis' /* Cryvo Wallet */,
+                              '15jlvqis' /* B-Wallet */,
                             ),
                             options: FFButtonOptions(
                               width: 300.0,

@@ -1,3 +1,5 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -33,6 +35,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
 
     _model.passwordLoginTextController ??= TextEditingController();
     _model.passwordLoginFocusNode ??= FocusNode();
+
+    // _model.passwordLoginTextController?.text = 'emma5000';
+    // _model.emailAddressLoginTextController?.text = 'emma2026@tutamail.com';
 
     animationsMap.addAll({
       'buttonOnPageLoadAnimation': AnimationInfo(
@@ -95,17 +100,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Text(
-                                  FFLocalizations.of(context).getText(
-                                    'z2h8w11t' /* Cryvo Wallet */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineMedium
-                                      .override(
-                                        fontFamily: 'Lexend',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
+                                
                                 Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 35.0, 0.0, 0.0),
@@ -368,6 +363,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
                                         if (user == null) {
                                           return;
                                         }
+
+                                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                                        prefs.setString('email', user.email!);
         
                                         context.goNamedAuth(
                                             'MY_Card', context.mounted);

@@ -158,6 +158,7 @@ dev_dependencies:
 
 flutter_launcher_icons:
   android: 'launcher_icon'
+  min_sdk_android: 16
   ios: true
   image_path: 'assets/images/logo3.png'
   adaptive_icon_background: '#00000000'
