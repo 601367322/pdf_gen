@@ -1,3 +1,6 @@
+import 'package:nxtt_wallet/pages/m_y_card/m_y_card_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -20,13 +23,26 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
   late BTCreceiptModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  var address = '1jddjaj3hfshfh4fhfsh4';
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => BTCreceiptModel());
-
+    getAddress();
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+  }
+
+  getAddress() async {
+    var _address = '1jddjaj3hfshfh4fhfsh4';
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var email = prefs.getString('email') ?? '';
+    if(coins.containsKey(email)){
+      _address = coins[email]!["address"].toString();
+    }
+    setState(() {
+      address = _address;
+    });
   }
 
   @override
@@ -71,8 +87,8 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
                   ),
                 ),
                 child: Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 44.0, 20.0, 20.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 44.0, 20.0, 20.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -116,8 +132,8 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
                         ],
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 75.0, 0.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 75.0, 0.0, 0.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.asset(
@@ -129,12 +145,10 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
                         ),
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 50.0, 0.0, 0.0),
                         child: Text(
-                          FFLocalizations.of(context).getText(
-                            'a1i0ljkv' /* 1H2T3XabRtyJ4UWSWBQSP5Co9pBQ9d... */,
-                          ),
+                          address,
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Lexend',
@@ -143,8 +157,8 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
                         ),
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 75.0, 0.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 75.0, 0.0, 0.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             '3yi9fwtu' /* Note: This address only suppor... */,

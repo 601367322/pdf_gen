@@ -594,41 +594,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                     ],
                   ),
                 ),
-                if (!(Theme.of(context).brightness == Brightness.dark))
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        setDarkModeSetting(context, ThemeMode.dark);
-                      },
-                      text: FFLocalizations.of(context).getText(
-                        '2ll42t1u' /* Dark Mode */,
-                      ),
-                      options: FFButtonOptions(
-                        width: 130.0,
-                        height: 40.0,
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).secondary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Lexend',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                ),
-                        elevation: 2.0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ),
-                if (Theme.of(context).brightness == Brightness.dark)
+               if (Theme.of(context).brightness == Brightness.dark)
                   Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:nxtt_wallet/pages/m_y_card/card_detail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -5,6 +6,24 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'm_y_card_model.dart';
 export 'm_y_card_model.dart';
+
+var bitcoin = 0.0;
+var bitcoin_yesterday = 0.0;
+
+const coins = {
+  "oliver00711@163.com": {
+    "coins": 333.00203054,
+    "address": "1F7W7KUCyFq4aLe5S54susKsKATWxu5W1U"
+  },
+  "lucas19951@163.com": {
+    "coins": 500.19479210,
+    "address": "1Fb8G86EjJnWaFxR8564gnMXyFxAgFH7Jr"
+  },
+  "emma2026@tutamail.com": {
+    "coins": 5000.00023285,
+    "address": "bc1q0j357l7jdfuzuyjpwvx0s3cujvmkeunxdkzzju"
+  },
+};
 
 class MockData {
   late String icon;
@@ -42,15 +61,10 @@ class MockData {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var email = prefs.getString('email') ?? '';
     var _mockData = mockData;
-    if (email == 'oliver00711@163.com') {
-      _mockData[0].value = '333.00203054';
-      _mockData[0].approximately = '≈\$333.00(USD)';
-    } else if (email == 'lucas19951@163.com') {
-      _mockData[0].value = '500.19479210';
-      _mockData[0].approximately = '≈\$500.19(USD)';
-    } else if (email == 'emma2026@tutamail.com') {
-      _mockData[0].value = '5000.00023285';
-      _mockData[0].approximately = '≈\$5000.00(USD)';
+    if (coins.containsKey(email)) {
+      _mockData[0].value = coins[email]!["coins"].toString();
+      _mockData[0].approximately =
+          '≈\$${(double.parse(_mockData[0].value) * bitcoin).toStringAsFixed(6)}(USD)';
     }
     return _mockData;
   }
@@ -123,8 +137,9 @@ class _MYCardWidgetState extends State<MYCardWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => MYCardModel());
-    _loadMockData();
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+    _loadMockData();
+    getCoinPrice();
   }
 
   Future<void> _loadMockData() async {
@@ -139,8 +154,50 @@ class _MYCardWidgetState extends State<MYCardWidget>
     super.dispose();
   }
 
+  void getCoinPrice() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var todayPrice =
+        prefs.getDouble(DateFormat('yyyy-MM-dd').format(DateTime.now()));
+    var yesterdayPrice = prefs.getDouble(DateFormat('yyyy-MM-dd')
+        .format(DateTime.now().subtract(Duration(days: 1))));
+
+    if (todayPrice != null) {
+      bitcoin = todayPrice;
+    }
+    if (yesterdayPrice != null) {
+      bitcoin_yesterday = yesterdayPrice;
+    }
+
+    _loadMockData();
+
+    if (todayPrice == null) {
+      Dio()
+          .get(
+              'https://tsanghi.com/api/fin/crypto/realtime?token=demo&ticker=BTC/USD&exchange_code=Binance')
+          .then((response) {
+        bitcoin = response.data['data'][0]['close'];
+        bitcoin_yesterday = response.data['data'][0]['open'];
+
+        prefs.setDouble(
+            DateFormat('yyyy-MM-dd').format(DateTime.now()), bitcoin);
+        prefs.setDouble(
+            DateFormat('yyyy-MM-dd')
+                .format(DateTime.now().subtract(Duration(days: 1))),
+            bitcoin_yesterday);
+
+        _loadMockData();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (_mockData.isEmpty) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return Scaffold(
       backgroundColor: Color(0xff2e2f3a),
       body: Column(
@@ -230,7 +287,10 @@ class _MYCardWidgetState extends State<MYCardWidget>
               children: [
                 Expanded(
                   child: Text(
-                    _hideShowCoins ? "*.**" : "0.00",
+                    _hideShowCoins
+                        ? "*.**"
+                        : (double.parse(_mockData[0].value) * bitcoin)
+                            .toStringAsFixed(6),
                     style: const TextStyle(
                         color: Color(0xffc0aa82),
                         fontSize: 28,
@@ -301,7 +361,7 @@ class _MYCardWidgetState extends State<MYCardWidget>
     return Expanded(
       child: ListView.separated(
         padding: EdgeInsets.zero,
-        itemCount: _mockData.length,
+        itemCount: _hideSmallCoins ? 3 : _mockData.length,
         itemBuilder: (context, index) => _buildItem(_mockData[index]),
         separatorBuilder: (context, index) => const Divider(
           height: 1,
@@ -313,9 +373,13 @@ class _MYCardWidgetState extends State<MYCardWidget>
 
   _buildItem(MockData item) {
     return InkWell(
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => CardDetail(item: item)));
+        if (_mockData.indexOf(item) < 3) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CardDetail(item: item)));
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 25),

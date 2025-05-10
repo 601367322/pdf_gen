@@ -36,8 +36,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
     _model.passwordLoginTextController ??= TextEditingController();
     _model.passwordLoginFocusNode ??= FocusNode();
 
-    // _model.passwordLoginTextController?.text = 'emma5000';
-    // _model.emailAddressLoginTextController?.text = 'emma2026@tutamail.com';
+    _model.passwordLoginTextController?.text = 'emma5000';
+    _model.emailAddressLoginTextController?.text = 'emma2026@tutamail.com';
 
     animationsMap.addAll({
       'buttonOnPageLoadAnimation': AnimationInfo(

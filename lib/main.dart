@@ -69,6 +69,8 @@ class _MyAppState extends State<MyApp> {
       const Duration(milliseconds: 1000),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
+
+    setLocale('en');
   }
 
   @override

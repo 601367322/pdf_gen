@@ -2,6 +2,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nxtt_wallet/flutter_flow/bitcoin_data.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:nxtt_wallet/pages/m_y_card/m_y_card_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BitcoinApi {
@@ -15,53 +16,30 @@ class BitcoinApi {
     String? email = prefs.getString('email');
     ////测试数据
     var data = [];
-    if (email != null) {
-      if (email == 'oliver00711@163.com') {
-        data = [
-          {
-            "priceUsd": "31,255,237.58",
-            "time": DateTime.now().millisecondsSinceEpoch,
-            "number": "333.00203054"
-          },
-          {
-            "priceUsd": "27,499,973.69",
-            "time": DateTime.now()
-                .subtract(Duration(days: 1))
-                .millisecondsSinceEpoch,
-            "number": "333.00203054"
-          },
-        ];
-      } else if (email == 'lucas19951@163.com') {
-        data = [
-          {
-            "priceUsd": "46,947,782.99",
-            "time": DateTime.now().millisecondsSinceEpoch,
-            "number": "500.19479210"
-          },
-          {
-            "priceUsd": "41,307,086.32",
-            "time": DateTime.now()
-                .subtract(Duration(days: 1))
-                .millisecondsSinceEpoch,
-            "number": "500.19479210"
-          },
-        ];
-      } else if (email == 'emma2026@tutamail.com') {
-        data = [
-          {
-            "priceUsd": "469,295.218.56",
-            "time": DateTime.now().millisecondsSinceEpoch,
-            "number": "5000.00023285"
-          },
-          {
-            "priceUsd": "412,910,192,30",
-            "time": DateTime.now()
-                .subtract(Duration(days: 1))
-                .millisecondsSinceEpoch,
-            "number": "5000.00023285"
-          },
-        ];
-      }
+    if (coins.containsKey(email)) {
+      String priceUsd =
+          (double.parse(coins[email]!["coins"].toString()) * bitcoin)
+              .toStringAsFixed(2)
+              .replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                  (Match match) => '${match[1]},');
+      String priceUsd2 =
+          (double.parse(coins[email]!["coins"].toString()) * bitcoin_yesterday)
+              .toStringAsFixed(2)
+              .replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                  (Match match) => '${match[1]},');
+      data = [
+        {
+          "priceUsd": priceUsd,
+          "time": DateTime.now().millisecondsSinceEpoch,
+          "number": coins[email]!["coins"].toString()
+        },
+        {
+          "priceUsd": priceUsd2,
+          "time":
+              DateTime.now().subtract(Duration(days: 1)).millisecondsSinceEpoch,
+          "number": coins[email]!["coins"].toString()
+        },
+      ];
       data.forEach((element) {
         bitcoinList.add(BitcoinData.fromJson(element));
       });

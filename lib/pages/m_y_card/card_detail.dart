@@ -182,7 +182,13 @@ class _CardDetailState extends State<CardDetail> {
               Expanded(
                 child: OutlinedButton(
                     onPressed: () {
-                      context.pushNamed('BTCreceipt');
+                      if (widget.item.name == 'BTC') {
+                        context.pushNamed('BTCreceipt');
+                      } else if (widget.item.name == 'ETH') {
+                        context.pushNamed('ETHreceipt');
+                      } else if (widget.item.name == 'USDT') {
+                        context.pushNamed('USDTreceipt');
+                      }
                     },
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -205,7 +211,13 @@ class _CardDetailState extends State<CardDetail> {
               Expanded(
                 child: FilledButton(
                     onPressed: () {
-                      context.pushNamed('BTCreceipt');
+                      if (widget.item.name == 'BTC') {
+                        context.pushNamed('BTCreceipt');
+                      } else if (widget.item.name == 'ETH') {
+                        context.pushNamed('ETHreceipt');
+                      } else if (widget.item.name == 'USDT') {
+                        context.pushNamed('USDTreceipt');
+                      }
                     },
                     style: FilledButton.styleFrom(
                       backgroundColor: Color(0xffe9c387),
@@ -228,14 +240,37 @@ class _CardDetailState extends State<CardDetail> {
     );
   }
 
+  goQrCode() {
+    if (widget.item.name == 'BTC') {
+      context.pushNamed('BTCqrcode');
+    } else if (widget.item.name == 'ETH') {
+      context.pushNamed('ETHqrcode');
+    } else if (widget.item.name == 'USDT') {
+      context.pushNamed('USDTqrcode');
+    }
+  }
+
   _buildList() {
-    return Expanded(
-      child: ListView.builder(
-        itemBuilder: (context, index) => _buildItem(index),
-        padding: EdgeInsets.zero,
-        itemCount: mockData.length,
-      ),
-    );
+    if (widget.item.name == 'BTC') {
+      return Expanded(
+        child: ListView.builder(
+          itemBuilder: (context, index) => _buildItem(index),
+          padding: EdgeInsets.zero,
+          itemCount: mockData.length,
+        ),
+      );
+    } else {
+      return Expanded(
+        child: Center(
+          child: Container(
+            child: Text(
+              'empty',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      );
+    }
   }
 
   _buildItem(int index) {
@@ -302,7 +337,12 @@ class _CardDetailState extends State<CardDetail> {
           if (item['to'] != '')
             Row(
               children: [
-                Expanded(child: Text(item['to']!.toString(),style: TextStyle(fontSize: 14, color: Colors.white.withAlpha(150)),)),
+                Expanded(
+                    child: Text(
+                  item['to']!.toString(),
+                  style: TextStyle(
+                      fontSize: 14, color: Colors.white.withAlpha(150)),
+                )),
               ],
             ),
         ],

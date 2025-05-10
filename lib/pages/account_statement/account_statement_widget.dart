@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:nxtt_wallet/flutter_flow/api_requset.dart';
 import 'package:nxtt_wallet/flutter_flow/bitcoin_data.dart';
 import 'package:nxtt_wallet/flutter_flow/date_utils.dart';
+import 'package:nxtt_wallet/pages/m_y_card/m_y_card_widget.dart';
 import 'package:pdf/pdf.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -79,7 +80,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
   Future<void> _generateAndDownloadPdf(
       List<BitcoinData> bitcoinData, BuildContext ctx) async {
     final pdf = pw.Document();
-    final sloganImageBytes = await _loadImage('assets/images/slogan.jpg');
+    final sloganImageBytes = await _loadImage('assets/images/slogan.png');
     final sloganImage = pw.MemoryImage(sloganImageBytes);
 
     final iconImageBytes = await _loadImage('assets/images/icon_image.png');
@@ -88,12 +89,8 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
     var address = '1jddjaj3hfshfh4fhfsh4';
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var email = prefs.getString('email') ?? '';
-    if (email == 'oliver00711@163.com') {
-      address = '1F7W7KUCyFq4aLe5S54susKsKATWxu5W1U';
-    } else if (email == 'lucas19951@163.com') {
-      address = '1Fb8G86EjJnWaFxR8564gnMXyFxAgFH7Jr';
-    } else if (email == 'emma2026@tutamail.com') {
-      address = 'bc1q0j357l7jdfuzuyjpwvx0s3cujvmkeunxdkzzju';
+    if(coins.containsKey(email)){
+      address = coins[email]!["address"].toString();
     }
 
     pdf.addPage(
