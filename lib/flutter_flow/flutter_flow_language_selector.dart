@@ -25,6 +25,8 @@
 
 import 'package:emoji_flag_converter/emoji_flag_converter.dart';
 import 'package:flutter/material.dart';
+import 'package:nxtt_wallet/flutter_flow/flutter_flow_theme.dart';
+import 'package:nxtt_wallet/flutter_flow/internationalization.dart';
 
 class FlutterFlowLanguageSelector extends StatelessWidget {
   const FlutterFlowLanguageSelector({
@@ -201,43 +203,61 @@ class _LanguagePickerDropdown extends StatelessWidget {
       height: 44.0,
       decoration: BoxDecoration(
         color: backgroundColor,
-        border: Border.all(color: borderColor ?? Colors.transparent),
+        border: Border.all(color: borderColor ?? Colors.transparent, width: 2),
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Center(
-          child: DropdownButton<String>(
-            isExpanded: true,
-            underline: Container(),
-            dropdownColor: dropdownColor ?? backgroundColor,
-            focusColor: Colors.transparent,
-            iconEnabledColor: dropdownIconColor,
-            iconDisabledColor: dropdownIconColor,
-            icon: dropdownIcon != null
-                ? Icon(
-                    dropdownIcon,
-                    size: 18.0,
-                    color: dropdownIconColor,
-                  )
-                : null,
-            hint: const Text(
-              'Unset',
-              style: TextStyle(
-                color: Colors.red,
-                fontFamily: 'Product Sans',
-                fontStyle: FontStyle.italic,
-                fontSize: 15,
+        child: Row(
+          children: [
+            Text(
+              FFLocalizations.of(context).getText(
+                'language' /* Language */,
+              ),
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Lexend',
+                    letterSpacing: 0.0,
+                  ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Center(
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  underline: Container(),
+                  dropdownColor: dropdownColor ?? backgroundColor,
+                  focusColor: Colors.transparent,
+                  iconEnabledColor: dropdownIconColor,
+                  iconDisabledColor: dropdownIconColor,
+                  style: TextStyle(color: Colors.transparent),
+                  icon: dropdownIcon != null
+                      ? Icon(
+                          dropdownIcon,
+                          size: 26.0,
+                          color: dropdownIconColor,
+                        )
+                      : null,
+                  hint: const Text(
+                    'Unset',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontFamily: 'Product Sans',
+                      fontStyle: FontStyle.italic,
+                      fontSize: 15,
+                    ),
+                  ),
+                  onChanged: (val) {
+                    if (val != null) {
+                      onChanged(val);
+                    }
+                  },
+                  items: items,
+                  value:
+                      currentLanguage.isNotEmpty ? currentLanguage : "Language",
+                ),
               ),
             ),
-            onChanged: (val) {
-              if (val != null) {
-                onChanged(val);
-              }
-            },
-            items: items,
-            value: currentLanguage.isNotEmpty ? currentLanguage : null,
-          ),
+          ],
         ),
       ),
     );

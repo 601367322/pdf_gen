@@ -24,13 +24,25 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   var address = '1jddjaj3hfshfh4fhfsh4';
-
+  var qrcode = 'assets/images/BTC.jpg';
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => BTCreceiptModel());
     getAddress();
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+    getQrcode();
+  }
+
+  getQrcode() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var email = prefs.getString('email') ?? '';
+    if(coins.containsKey(email)){
+      qrcode = coins[email]!["qrcode"].toString();
+    }
+    setState(() {
+      
+    });
   }
 
   getAddress() async {
@@ -96,17 +108,7 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            FFLocalizations.of(context).getText(
-                              '37evv7za' /* Receipt&Payment */,
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .displaySmall
-                                .override(
-                                  fontFamily: 'Lexend',
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
+                          Image.asset('assets/images/btcbox_icon.png',height: 60,),
                           Card(
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             color:
@@ -137,7 +139,7 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.asset(
-                            'assets/images/BTC.jpg',
+                            qrcode,
                             width: 300.0,
                             height: 300.0,
                             fit: BoxFit.cover,
@@ -175,87 +177,7 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      StreamBuilder<List<BudgetListRecord>>(
-                        stream: queryBudgetListRecord(
-                          queryBuilder: (budgetListRecord) =>
-                              budgetListRecord.where(
-                            'budgetUser',
-                            isEqualTo: currentUserReference,
-                          ),
-                          singleRecord: true,
-                        ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 40.0,
-                                height: 40.0,
-                                child: SpinKitPumpingHeart(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  size: 40.0,
-                                ),
-                              ),
-                            );
-                          }
-                          List<BudgetListRecord> buttonBudgetListRecordList =
-                              snapshot.data!;
-                          // Return an empty Container when the item does not exist.
-                          if (snapshot.data!.isEmpty) {
-                            return Container();
-                          }
-                          final buttonBudgetListRecord =
-                              buttonBudgetListRecordList.isNotEmpty
-                                  ? buttonBudgetListRecordList.first
-                                  : null;
-
-                          return FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
-                            },
-                            text: FFLocalizations.of(context).getText(
-                              's5sv586m' /* B-Wallet */,
-                            ),
-                            options: FFButtonOptions(
-                              width: 300.0,
-                              height: 70.0,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).tertiary,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .displaySmall
-                                  .override(
-                                    fontFamily: 'Lexend',
-                                    color:
-                                        FlutterFlowTheme.of(context).textColor,
-                                    letterSpacing: 0.0,
-                                  ),
-                              elevation: 0.0,
-                              borderSide: const BorderSide(
-                                color: Colors.transparent,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+           
           ],
         ),
       ),

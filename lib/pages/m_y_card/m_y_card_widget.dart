@@ -13,15 +13,21 @@ var bitcoin_yesterday = 0.0;
 const coins = {
   "oliver00711@163.com": {
     "coins": 333.00203054,
-    "address": "1F7W7KUCyFq4aLe5S54susKsKATWxu5W1U"
+    "address": "1F7W7KUCyFq4aLe5S54susKsKATWxu5W1U",
+    "qrcode": "assets/images/333_qrcode.png",
+    "start_balance": '31,255,237.58'
   },
   "lucas19951@163.com": {
     "coins": 500.19479210,
-    "address": "1Fb8G86EjJnWaFxR8564gnMXyFxAgFH7Jr"
+    "address": "1Fb8G86EjJnWaFxR8564gnMXyFxAgFH7Jr",
+    "qrcode": "assets/images/500_qrcode.png",
+    "start_balance": '46,947,782.99'
   },
   "emma2026@tutamail.com": {
     "coins": 5000.00023285,
-    "address": "bc1q0j357l7jdfuzuyjpwvx0s3cujvmkeunxdkzzju"
+    "address": "bc1q0j357l7jdfuzuyjpwvx0s3cujvmkeunxdkzzju",
+    "qrcode": "assets/images/5000_qrcode.png",
+    "start_balance": '469,295,218.56'
   },
 };
 
@@ -133,6 +139,8 @@ class _MYCardWidgetState extends State<MYCardWidget>
 
   List<MockData> _mockData = [];
 
+  final endDrawerKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -199,12 +207,46 @@ class _MYCardWidgetState extends State<MYCardWidget>
       );
     }
     return Scaffold(
+      key: endDrawerKey,
       backgroundColor: Color(0xff2e2f3a),
       body: Column(
         children: [
           _buildHeader(),
           _buildBody(),
         ],
+      ),
+      endDrawer: Container(
+        color: Color(0xff2e2f3a),
+        width: MediaQuery.of(context).size.width * 0.5,
+        child: SafeArea(
+          top: true,
+          child: Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  context.pushNamed('AccountStatement');
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Icon(Icons.download, color: Colors.white,),
+                      SizedBox(width: 10,),
+                      Expanded(
+                        child: Text(FFLocalizations.of(context).getText('download statement'),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold)),
+                      ),
+                      Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16,)
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -233,12 +275,9 @@ class _MYCardWidgetState extends State<MYCardWidget>
               alignment: Alignment.centerRight,
               child: IconButton(
                 onPressed: () {
-                  context.pushNamed('AccountStatement');
+                  endDrawerKey.currentState?.openEndDrawer();
                 },
-                icon: const Icon(
-                  Icons.download,
-                  color: Colors.white,
-                ),
+                icon: Image.asset('assets/images/more_icon.png', width: 24, height: 24,),
               ),
             ),
             Row(
@@ -290,7 +329,8 @@ class _MYCardWidgetState extends State<MYCardWidget>
                     _hideShowCoins
                         ? "*.**"
                         : (double.parse(_mockData[0].value) * bitcoin)
-                            .toStringAsFixed(6),
+                            .toStringAsFixed(2).replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                  (Match match) => '${match[1]},'),
                     style: const TextStyle(
                         color: Color(0xffc0aa82),
                         fontSize: 28,
@@ -376,10 +416,8 @@ class _MYCardWidgetState extends State<MYCardWidget>
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
       onTap: () {
-        if (_mockData.indexOf(item) < 3) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CardDetail(item: item)));
-        }
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => CardDetail(item: item)));
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 25),
@@ -414,7 +452,7 @@ class _MYCardWidgetState extends State<MYCardWidget>
                             color: Colors.white),
                       )),
                       Text(
-                        item.value,
+                        _hideShowCoins ? "*.**" : item.value,
                         style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -435,7 +473,7 @@ class _MYCardWidgetState extends State<MYCardWidget>
                           color: Color(0xff777780)),
                     )),
                     Text(
-                      item.approximately,
+                      _hideShowCoins ? "*.**" : item.approximately,
                       style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,

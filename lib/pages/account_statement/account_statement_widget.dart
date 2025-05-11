@@ -89,7 +89,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
     var address = '1jddjaj3hfshfh4fhfsh4';
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var email = prefs.getString('email') ?? '';
-    if(coins.containsKey(email)){
+    if (coins.containsKey(email)) {
       address = coins[email]!["address"].toString();
     }
 
@@ -252,65 +252,19 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
             pw.Align(
               alignment: pw.Alignment.centerLeft, // 左对齐
               child: pw.Text(
-                'BTC Daily Balance Report',
+                'BTC BALANCE SUMMARY:',
                 style: pw.TextStyle(
+                  letterSpacing: 1.5,
                     fontSize: 10, fontWeight: pw.FontWeight.normal),
               ),
             ),
             pw.SizedBox(height: 10),
 
             // Sixth Row: Bitcoin Data List
-            pw.ListView.builder(
-              itemCount: bitcoinData.length + 1,
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  return pw.Container(
-                    padding: const pw.EdgeInsets.only(top: 6, bottom: 5),
-                    decoration: const pw.BoxDecoration(
-                      border: pw.Border(
-                        bottom:
-                            pw.BorderSide(color: PdfColors.black, width: 0.5),
-                      ),
-                    ),
-                    child: pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Expanded(
-                          child: pw.Text(
-                            "TIME",
-                            style: pw.TextStyle(
-                              fontSize: 8,
-                              fontWeight: pw.FontWeight.normal,
-                            ),
-                          ),
-                        ),
-                        pw.Expanded(
-                            child: pw.Container(
-                          alignment: pw.Alignment.center,
-                          child: pw.Text(
-                            'AMOUNT (BTC)',
-                            style: pw.TextStyle(
-                              fontSize: 8,
-                              fontWeight: pw.FontWeight.normal,
-                            ),
-                          ),
-                        )),
-                        pw.Expanded(
-                            child: pw.Container(
-                                alignment: pw.Alignment.centerRight,
-                                child: pw.Text(
-                                  'AMOUNT (USD)',
-                                  style: pw.TextStyle(
-                                    fontSize: 8,
-                                    fontWeight: pw.FontWeight.normal,
-                                  ),
-                                )))
-                      ],
-                    ),
-                  );
-                }
-                final item = bitcoinData[index - 1];
-                return pw.Container(
+            pw.Column(
+              children: [
+                //1
+                pw.Container(
                   padding: const pw.EdgeInsets.only(top: 6, bottom: 5),
                   decoration: const pw.BoxDecoration(
                     border: pw.Border(
@@ -320,41 +274,191 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
-                      pw.Expanded(
-                        child: pw.Text(
-                          DateFormat('yyyy-MM-dd').format(
-                            DateTime.fromMillisecondsSinceEpoch(item.time),
-                          ),
-                          style: pw.TextStyle(
-                            fontSize: 8,
-                            fontWeight: pw.FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                      pw.Expanded(
-                          child: pw.Container(
-                              alignment: pw.Alignment.center,
-                              child: pw.Text(
-                                '${item.number}  BTC',
+                      pw.SizedBox(
+                        width:320,
+                        child: pw.Row(
+                            mainAxisAlignment:
+                                pw.MainAxisAlignment.spaceBetween,
+                            children: [
+                              pw.Text(
+                                'STARTING BALANCE (${DateFormat('yyyy-MM-dd').format(startDate)})',
                                 style: pw.TextStyle(
                                   fontSize: 8,
+                                  letterSpacing: 1.5,
                                   fontWeight: pw.FontWeight.normal,
                                 ),
-                              ))),
+                              ),
+                              pw.Container(
+                                  alignment: pw.Alignment.centerRight,
+                                  child: pw.Text(
+                                    '${bitcoinData[0].number}  BTC',
+                                    style: pw.TextStyle(
+                                      fontSize: 8,
+                                      letterSpacing: 1.5,
+                                      fontWeight: pw.FontWeight.normal,
+                                    ),
+                                  ))
+                            ]),
+                      ),
                       pw.Expanded(
                           child: pw.Container(
                               alignment: pw.Alignment.centerRight,
                               child: pw.Text(
-                        '${item.priceUsd}  USD',
-                        style: pw.TextStyle(
-                          fontSize: 8,
-                          fontWeight: pw.FontWeight.normal,
-                        ),
-                      )))
+                                '${bitcoinData[0].priceUsd}  USD',
+                                style: pw.TextStyle(
+                                  fontSize: 8,
+                                  letterSpacing: 1.5,
+                                  fontWeight: pw.FontWeight.normal,
+                                ),
+                              )))
                     ],
                   ),
-                );
-              },
+                ),
+                //2
+                pw.Container(
+                  padding: const pw.EdgeInsets.only(top: 6, bottom: 5),
+                  decoration: const pw.BoxDecoration(
+                    border: pw.Border(
+                      bottom: pw.BorderSide(color: PdfColors.black, width: 0.5),
+                    ),
+                  ),
+                  child: pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+                      pw.SizedBox(
+                        width:320,
+                        child: pw.Row(
+                            mainAxisAlignment:
+                                pw.MainAxisAlignment.spaceBetween,
+                            children: [
+                              pw.Text(
+                                'ENDING BALANCE (${DateFormat('yyyy-MM-dd').format(endDate)})',
+                                style: pw.TextStyle(
+                                  fontSize: 8,
+                                  letterSpacing: 1.5,
+                                  fontWeight: pw.FontWeight.normal,
+                                ),
+                              ),
+                              pw.Container(
+                                  alignment: pw.Alignment.centerRight,
+                                  child: pw.Text(
+                                    '${bitcoinData[0].number}  BTC',
+                                    style: pw.TextStyle(
+                                      fontSize: 8,
+                                      letterSpacing: 1.5,
+                                      fontWeight: pw.FontWeight.normal,
+                                    ),
+                                  ))
+                            ]),
+                      ),
+                     
+                      pw.Expanded(
+                          child: pw.Container(
+                              alignment: pw.Alignment.centerRight,
+                              child: pw.Text(
+                                '${bitcoinData[0].startBalance}  USD',
+                                style: pw.TextStyle(
+                                  fontSize: 8,
+                                  letterSpacing: 1.5,
+                                  fontWeight: pw.FontWeight.normal,
+                                ),
+                              )))
+                    ],
+                  ),
+                ),
+                //3
+                pw.Container(
+                  padding: const pw.EdgeInsets.only(top: 6, bottom: 5),
+                  decoration: const pw.BoxDecoration(
+                    border: pw.Border(
+                      bottom: pw.BorderSide(color: PdfColors.black, width: 0.5),
+                    ),
+                  ),
+                  child: pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+                     
+                       pw.SizedBox(
+                        width:320,
+                        child: pw.Row(
+                            mainAxisAlignment:
+                                pw.MainAxisAlignment.spaceBetween,
+                            children: [
+                              pw.Text(
+                                'TOTAL RECEIVED',
+                                style: pw.TextStyle(
+                                  fontSize: 8,
+                                  letterSpacing: 1.5,
+                                  fontWeight: pw.FontWeight.normal,
+                                ),
+                              ),
+                              pw.Container(
+                                  alignment: pw.Alignment.centerRight,
+                                  child: pw.Text(
+                                    '0.00000000  BTC',
+                                    style: pw.TextStyle(
+                                      fontSize: 8,
+                                      letterSpacing: 1.5,
+                                      fontWeight: pw.FontWeight.normal,
+                                    ),
+                                  ))
+                            ]),
+                      ),
+                     
+                      pw.Expanded(
+                          child: pw.Container(
+                        alignment: pw.Alignment.centerRight,
+                      ))
+                    ],
+                  ),
+                ),
+                //4
+                pw.Container(
+                  padding: const pw.EdgeInsets.only(top: 6, bottom: 5),
+                  decoration: const pw.BoxDecoration(
+                    border: pw.Border(
+                      bottom: pw.BorderSide(color: PdfColors.black, width: 0.5),
+                    ),
+                  ),
+                  child: pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+
+                       pw.SizedBox(
+                        width:320,
+                        child: pw.Row(
+                            mainAxisAlignment:
+                                pw.MainAxisAlignment.spaceBetween,
+                            children: [
+                              pw.Text(
+                                'TOTAL SENT',
+                                style: pw.TextStyle(
+                                  fontSize: 8,
+                                  letterSpacing: 1.5,
+                                  fontWeight: pw.FontWeight.normal,
+                                ),
+                              ),
+                              pw.Container(
+                                  alignment: pw.Alignment.centerRight,
+                                  child: pw.Text(
+                                    '0.00000000  BTC',
+                                    style: pw.TextStyle(
+                                      fontSize: 8,
+                                      letterSpacing: 1.5,
+                                      fontWeight: pw.FontWeight.normal,
+                                    ),
+                                  ))
+                            ]),
+                      ),
+                     
+                      pw.Expanded(
+                          child: pw.Container(
+                        alignment: pw.Alignment.centerRight,
+                      ))
+                    ],
+                  ),
+                ),
+              ],
             ),
             pw.SizedBox(height: 4),
             pw.Text(

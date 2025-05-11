@@ -96,31 +96,16 @@ class _DateRangePickerState extends State<DateRangePicker> {
       initialDateRange: selectedDateRange,
       locale: Locale('en', 'CH'),
       builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
-              primary: widget.pickerSelectedDateColor ??
-                  Theme.of(context).primaryColor,
-              onPrimary: Colors.white,
-              surface: widget.pickerBackgroundColor ?? Colors.white,
-              onSurface: Colors.black,
+        return Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: widget.pickerDialogWidth ?? 400.0,
+              maxHeight: widget.pickerDialogHeight ??
+                  MediaQuery.of(context).size.height * 0.8,
             ),
-            appBarTheme: AppBarTheme(
-              backgroundColor: widget.pickerHeaderColor,
-              foregroundColor: Colors.white,
-            ),
-          ),
-          child: Center(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: widget.pickerDialogWidth ?? 400.0,
-                maxHeight: widget.pickerDialogHeight ??
-                    MediaQuery.of(context).size.height * 0.8,
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(widget.pickerDialogPadding ?? 0.0),
-                child: child!,
-              ),
+            child: Padding(
+              padding: EdgeInsets.all(widget.pickerDialogPadding ?? 0.0),
+              child: child!,
             ),
           ),
         );

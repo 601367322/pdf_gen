@@ -96,8 +96,8 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                     borderRadius: BorderRadius.circular(0.0),
                   ),
                   child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        20.0, 0.0, 0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -137,8 +137,9 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 0.0, 0.0, 0.0),
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              12.0, 0.0, 0.0, 0.0),
                                       child: Container(
                                         width: 44.0,
                                         height: 44.0,
@@ -195,37 +196,6 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                           .textColor,
                                       letterSpacing: 0.0,
                                     ),
-                              ),
-                              Flexible(
-                                child: Align(
-                                  alignment: const AlignmentDirectional(1.0, 0.0),
-                                  child: FlutterFlowLanguageSelector(
-                                    width: 200.0,
-                                    height: 40.0,
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                    borderColor: Colors.transparent,
-                                    dropdownIconColor:
-                                        FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                    borderRadius: 8.0,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Lexend',
-                                          letterSpacing: 0.0,
-                                        ),
-                                    hideFlags: true,
-                                    flagSize: 24.0,
-                                    flagTextGap: 8.0,
-                                    currentLanguage: FFLocalizations.of(context)
-                                        .languageCode,
-                                    languages: FFLocalizations.languages(),
-                                    onChanged: (lang) =>
-                                        setAppLanguage(context, lang),
-                                  ),
-                                ),
                               ),
                             ],
                           ),
@@ -375,8 +345,41 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                     ),
                   ],
                 ),
+               Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FlutterFlowLanguageSelector(
+                        width: MediaQuery.sizeOf(context).width * 0.9,
+                        height: 60.0,
+                        backgroundColor:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                        borderColor: FlutterFlowTheme.of(context).alternate,
+                        dropdownIcon: Icons.chevron_right_rounded,
+                        dropdownIconColor:
+                            FlutterFlowTheme.of(context).secondaryText,
+                        borderRadius: 8.0,
+                        textStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.override(
+                                  fontFamily: 'Lexend',
+                                  letterSpacing: 0.0,
+                                ),
+                        hideFlags: true,
+                        flagSize: 24.0,
+                        flagTextGap: 8.0,
+                        currentLanguage:
+                            FFLocalizations.of(context).languageCode,
+                        languages: FFLocalizations.languages(),
+                        onChanged: (lang) => setAppLanguage(context, lang),
+                      ),
+                    ],
+                  ),
+                ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -449,7 +452,8 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -522,7 +526,8 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -594,40 +599,6 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                     ],
                   ),
                 ),
-               if (Theme.of(context).brightness == Brightness.dark)
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        setDarkModeSetting(context, ThemeMode.light);
-                      },
-                      text: FFLocalizations.of(context).getText(
-                        '8d386226' /* Light Mode */,
-                      ),
-                      options: FFButtonOptions(
-                        width: 130.0,
-                        height: 40.0,
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).secondary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Lexend',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                ),
-                        elevation: 2.0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ),
               ],
             ),
           ),

@@ -31,13 +31,8 @@ class BitcoinApi {
         {
           "priceUsd": priceUsd,
           "time": DateTime.now().millisecondsSinceEpoch,
-          "number": coins[email]!["coins"].toString()
-        },
-        {
-          "priceUsd": priceUsd2,
-          "time":
-              DateTime.now().subtract(Duration(days: 1)).millisecondsSinceEpoch,
-          "number": coins[email]!["coins"].toString()
+          "number": coins[email]!["coins"].toString(),
+          "start_balance": coins[email]!["start_balance"]
         },
       ];
       data.forEach((element) {

@@ -712,6 +712,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '編輯資料',
       'zh_Hant': '編輯個人資料',
     },
+    'language': {
+      'en': 'Language',
+      'ar': 'اللغة',
+      'zh_Hans': '语言',
+      'zh_Hant': '語言',
+    },
+    'download statement': {
+      'en': 'Download Statement',
+      'ar': 'تحميل البيان',
+      'zh_Hans': '下载对账单',
+      'zh_Hant': '下載對賬單',
+    },
     '03k0vw86': {
       'en': 'Change Password',
       'ar': 'تغيير كلمة المرور',

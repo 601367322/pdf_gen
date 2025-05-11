@@ -182,13 +182,7 @@ class _CardDetailState extends State<CardDetail> {
               Expanded(
                 child: OutlinedButton(
                     onPressed: () {
-                      if (widget.item.name == 'BTC') {
-                        context.pushNamed('BTCreceipt');
-                      } else if (widget.item.name == 'ETH') {
-                        context.pushNamed('ETHreceipt');
-                      } else if (widget.item.name == 'USDT') {
-                        context.pushNamed('USDTreceipt');
-                      }
+                      goQrCode();
                     },
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -211,13 +205,7 @@ class _CardDetailState extends State<CardDetail> {
               Expanded(
                 child: FilledButton(
                     onPressed: () {
-                      if (widget.item.name == 'BTC') {
-                        context.pushNamed('BTCreceipt');
-                      } else if (widget.item.name == 'ETH') {
-                        context.pushNamed('ETHreceipt');
-                      } else if (widget.item.name == 'USDT') {
-                        context.pushNamed('USDTreceipt');
-                      }
+                      goQrCode();
                     },
                     style: FilledButton.styleFrom(
                       backgroundColor: Color(0xffe9c387),
@@ -241,12 +229,10 @@ class _CardDetailState extends State<CardDetail> {
   }
 
   goQrCode() {
-    if (widget.item.name == 'BTC') {
-      context.pushNamed('BTCqrcode');
-    } else if (widget.item.name == 'ETH') {
-      context.pushNamed('ETHqrcode');
-    } else if (widget.item.name == 'USDT') {
-      context.pushNamed('USDTqrcode');
+    if (widget.item.name == 'BTC' ||
+        widget.item.name == 'ETH' ||
+        widget.item.name == 'USDT') {
+      context.pushNamed('BTCreceipt');
     }
   }
 
@@ -260,16 +246,7 @@ class _CardDetailState extends State<CardDetail> {
         ),
       );
     } else {
-      return Expanded(
-        child: Center(
-          child: Container(
-            child: Text(
-              'empty',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      );
+      return SizedBox.shrink();
     }
   }
 
