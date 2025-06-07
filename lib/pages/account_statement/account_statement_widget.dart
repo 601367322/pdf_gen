@@ -184,7 +184,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                     ),
                   ),
                   pw.Positioned(
-                    right: 45, // 你可以根据需要调整位置
+                    right: 0, // 你可以根据需要调整位置
                     top: 2, // 如果需要调整垂直位置
                     child: pw.Image(iconImage, height: 65),
                   ),
