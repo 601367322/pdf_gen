@@ -83,6 +83,10 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
     final sloganImageBytes = await _loadImage('assets/images/slogan.png');
     final sloganImage = pw.MemoryImage(sloganImageBytes);
 
+    final sloganLogoImageBytes =
+        await _loadImage('assets/images/slogan_logo.png');
+    final sloganLogoImage = pw.MemoryImage(sloganLogoImageBytes);
+
     final iconImageBytes = await _loadImage('assets/images/icon_image.png');
     final iconImage = pw.MemoryImage(iconImageBytes);
 
@@ -93,17 +97,21 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
       address = coins[email]!["address"].toString();
     }
 
+    var pageFont = await rootBundle.load('assets/fonts/ayuthaya-webfont.ttf');
+
+    var gtFont = await rootBundle.load('assets/fonts/gt.ttf');
+
     pdf.addPage(
       pw.MultiPage(
         pageTheme: pw.PageTheme(
           pageFormat: PdfPageFormat.a4,
-          margin: pw.EdgeInsets.all(32),
+          margin: pw.EdgeInsets.only(left: 32, right: 32, bottom: 16, top: 16),
           theme: pw.ThemeData(
             defaultTextStyle: pw.TextStyle(
               fontSize: 12,
               fontWeight: pw.FontWeight.normal,
               font: pw.Font.ttf(
-                await rootBundle.load('assets/fonts/ayuthaya-webfont.ttf'),
+                pageFont,
               ),
             ),
           ),
@@ -111,52 +119,79 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
         build: (pw.Context context) {
           return [
             // First Row: Cryvo-Wallet Logo and Title
-            pw.Stack(
-              children: [
-                pw.Column(children: [
-                  pw.Row(
-                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                    children: [
-                      pw.Image(sloganImage, height: 50),
-                      pw.Column(
-                        crossAxisAlignment: pw.CrossAxisAlignment.end,
-                        mainAxisAlignment: pw.MainAxisAlignment.center,
-                        children: [
-                          pw.Text('BTC B-Wallet',
-                              style: pw.TextStyle(
-                                  fontSize: 8,
-                                  fontWeight: pw.FontWeight.normal)),
-                          pw.SizedBox(height: 10),
-                          pw.Text(
-                              '${DateFormat('yyyy-MM-dd').format(startDate)} - ${DateFormat('yyyy-MM-dd').format(endDate)}',
-                              style: pw.TextStyle(
-                                  fontSize: 8,
-                                  fontWeight: pw.FontWeight.normal)),
-                        ],
-                      ),
-                    ],
-                  ),
-                  pw.Padding(
-                    padding: pw.EdgeInsets.only(left: 2, right: 2, top: 8),
-                    child: pw.Text(
-                      '************************************************************************************************************************************************************************************************'
-                      '',
-                      maxLines: 2,
-                      style: pw.TextStyle(
-                          fontSize: 6,
-                          letterSpacing: 5,
-                          fontWeight: pw.FontWeight.normal,
-                          lineSpacing: 2),
+            pw.Container(
+              height: 100,
+              child: pw.Stack(
+                children: [
+                  pw.Align(
+                    alignment: pw.Alignment.bottomLeft,
+                    child: pw.Column(
+                      mainAxisAlignment: pw.MainAxisAlignment.end,
+                      crossAxisAlignment: pw.CrossAxisAlignment.end,
+                      children: [
+                        pw.Row(
+                          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                          children: [
+                            pw.Column(
+                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                mainAxisAlignment: pw.MainAxisAlignment.end,
+                                children: [
+                                  pw.Image(sloganImage, height: 10),
+                                  pw.SizedBox(height: 5),
+                                  pw.Image(sloganLogoImage, height: 30),
+                                ]),
+                            pw.Column(
+                              crossAxisAlignment: pw.CrossAxisAlignment.end,
+                              mainAxisAlignment: pw.MainAxisAlignment.center,
+                              children: [
+                                pw.Text('BTC B-Wallet',
+                                    style: pw.TextStyle(
+                                        fontSize: 8,
+                                        fontWeight: pw.FontWeight.normal)),
+                                pw.SizedBox(height: 5),
+                                pw.Text(
+                                  'https://www.btcbox.co.jp',
+                                  style: pw.TextStyle(
+                                    fontSize: 8,
+                                    fontWeight: pw.FontWeight.normal,
+                                  ),
+                                ),
+                                pw.SizedBox(height: 5),
+                                pw.Text(
+                                    '${DateFormat('yyyy-MM-dd').format(startDate)} - ${DateFormat('yyyy-MM-dd').format(endDate)}',
+                                    style: pw.TextStyle(
+                                        fontSize: 8,
+                                        fontWeight: pw.FontWeight.normal)),
+                              ],
+                            ),
+                          ],
+                        ),
+                        pw.Padding(
+                          padding:
+                              pw.EdgeInsets.only(left: 2, right: 2, top: 8),
+                          child: pw.Text(
+                            '************************************************************************************************************************************************************************************************'
+                            '',
+                            maxLines: 2,
+                            style: pw.TextStyle(
+                                fontSize: 6,
+                                letterSpacing: 5,
+                                fontWeight: pw.FontWeight.normal,
+                                lineSpacing: 2),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ]),
-                pw.Positioned(
-                  right: 0, // 你可以根据需要调整位置
-                  top: 0, // 如果需要调整垂直位置
-                  child: pw.Image(iconImage, height: 55),
-                ),
-              ],
+                  pw.Positioned(
+                    right: 40, // 你可以根据需要调整位置
+                    top: 0, // 如果需要调整垂直位置
+                    child: pw.Image(iconImage, height: 65),
+                  ),
+                ],
+              ),
             ),
+
             // Third Row: Wallet Statement and Bitcoin Label
             pw.Padding(
               padding: pw.EdgeInsets.only(top: 5, left: 5, right: 5),
@@ -201,7 +236,12 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                       pw.Text(
                         'COMPANY NAME : Next Technology Holding Inc.',
                         style: pw.TextStyle(
-                            fontSize: 10, fontWeight: pw.FontWeight.normal),
+                          fontSize: 10,
+                          fontWeight: pw.FontWeight.normal,
+                          font: pw.Font.ttf(
+                            gtFont,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -222,7 +262,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                         style: pw.TextStyle(
                             fontSize: 8,
                             fontWeight: pw.FontWeight.normal,
-                            color: const PdfColor.fromInt(0x0000FF)),
+                            color: const PdfColor.fromInt(0x5d5b97)),
                       ),
                     ],
                   ),
@@ -255,7 +295,9 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                 'BTC BALANCE SUMMARY:',
                 style: pw.TextStyle(
                   letterSpacing: 1.5,
-                    fontSize: 10, fontWeight: pw.FontWeight.normal),
+                  fontSize: 10,
+                  fontWeight: pw.FontWeight.normal,
+                ),
               ),
             ),
             pw.SizedBox(height: 10),
@@ -275,7 +317,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
                       pw.SizedBox(
-                        width:320,
+                        width: 320,
                         child: pw.Row(
                             mainAxisAlignment:
                                 pw.MainAxisAlignment.spaceBetween,
@@ -326,7 +368,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
                       pw.SizedBox(
-                        width:320,
+                        width: 320,
                         child: pw.Row(
                             mainAxisAlignment:
                                 pw.MainAxisAlignment.spaceBetween,
@@ -351,7 +393,6 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                                   ))
                             ]),
                       ),
-                     
                       pw.Expanded(
                           child: pw.Container(
                               alignment: pw.Alignment.centerRight,
@@ -377,9 +418,8 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
-                     
-                       pw.SizedBox(
-                        width:320,
+                      pw.SizedBox(
+                        width: 320,
                         child: pw.Row(
                             mainAxisAlignment:
                                 pw.MainAxisAlignment.spaceBetween,
@@ -404,7 +444,6 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                                   ))
                             ]),
                       ),
-                     
                       pw.Expanded(
                           child: pw.Container(
                         alignment: pw.Alignment.centerRight,
@@ -423,9 +462,8 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                   child: pw.Row(
                     mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                     children: [
-
-                       pw.SizedBox(
-                        width:320,
+                      pw.SizedBox(
+                        width: 320,
                         child: pw.Row(
                             mainAxisAlignment:
                                 pw.MainAxisAlignment.spaceBetween,
@@ -450,7 +488,6 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                                   ))
                             ]),
                       ),
-                     
                       pw.Expanded(
                           child: pw.Container(
                         alignment: pw.Alignment.centerRight,
@@ -465,12 +502,58 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
               '-------------------------------------------------------------------------------------------------------------------------------------',
               maxLines: 1,
               style: pw.TextStyle(
+                fontSize: 8,
+                fontWeight: pw.FontWeight.normal,
+                letterSpacing: 5,
+              ),
+            ),
+            pw.SizedBox(height: 10),
+            pw.Align(
+              alignment: pw.Alignment.centerLeft, // 左对齐
+              child: pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Row(children: [
+                    pw.Text(
+                      'HISTORY OF TRANSACTIONS:',
+                      style: pw.TextStyle(
+                        fontSize: 10,
+                        letterSpacing: 1.5,
+                        fontWeight: pw.FontWeight.normal,
+                      ),
+                    ),
+                    pw.SizedBox(width: 10),
+                    pw.Text(
+                      '${DateFormat('yyyy-MM-dd').format(startDate)} - ${DateFormat('yyyy-MM-dd').format(endDate)}',
+                      style: pw.TextStyle(
+                        fontSize: 10,
+                        letterSpacing: 1.5,
+                        fontWeight: pw.FontWeight.normal,
+                      ),
+                    ),
+                  ]),
+                  pw.SizedBox(height: 10),
+                  pw.Text(
+                    'There was no transactions involving this address in the selected period',
+                    style: pw.TextStyle(
+                      fontSize: 10,
+                      letterSpacing: 1.5,
+                      fontWeight: pw.FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            pw.SizedBox(height: 10),
+            pw.Text(
+              '-------------------------------------------------------------------------------------------------------------------------------------',
+              maxLines: 1,
+              style: pw.TextStyle(
                   fontSize: 8,
                   fontWeight: pw.FontWeight.normal,
                   letterSpacing: 5),
             ),
             pw.SizedBox(height: 10),
-
             // Seventh Row: Note Header
             pw.Align(
                 alignment: pw.Alignment.centerLeft, // 左对齐
@@ -493,6 +576,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                     'BTC - USD RATE AT THE TIME OF TRANSACTION',
                     style: pw.TextStyle(
                       fontSize: 7,
+                      letterSpacing: 1.5,
                       fontWeight: pw.FontWeight.normal,
                     ),
                   ),
@@ -500,6 +584,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                     'OMNI LAYER BALANCES ARE NOT INCLUDED IN THIS REPORT',
                     style: pw.TextStyle(
                       fontSize: 7,
+                      letterSpacing: 1.5,
                       fontWeight: pw.FontWeight.normal,
                     ),
                   ),
@@ -514,21 +599,20 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                 child: pw.Text(
                   'DISCLAIMER',
                   style: pw.TextStyle(
-                      fontSize: 10, fontWeight: pw.FontWeight.normal),
+                    letterSpacing: 1.5,
+                    fontSize: 10,
+                    fontWeight: pw.FontWeight.normal,
+                  ),
                 )),
             pw.SizedBox(height: 10),
             // Eighth Row: USD Rate at the Time of Transaction
-            pw.Row(
-              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-              children: [
-                pw.Text(
-                  'THIS RECEIPT HAS GENERATED AUTOMATICALLY ON #${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now())} (UTC) AND IS BASED ON PUBLIC DATA FROM THEBITCOIN BLOCKCHAIN',
-                  style: pw.TextStyle(
-                    fontSize: 7,
-                    fontWeight: pw.FontWeight.normal,
-                  ),
-                ),
-              ],
+            pw.Text(
+              'THIS RECEIPT HAS GENERATED AUTOMATICALLY ON ${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now())} (UTC) AND IS BASED ON PUBLIC DATA FROM THEBITCOIN BLOCKCHAIN',
+              style: pw.TextStyle(
+                fontSize: 7,
+                letterSpacing: 1.5,
+                fontWeight: pw.FontWeight.normal,
+              ),
             ),
           ];
         },
