@@ -150,7 +150,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                                         fontWeight: pw.FontWeight.normal)),
                                 pw.SizedBox(height: 5),
                                 pw.Text(
-                                  'https://www.btcbox.co.jp',
+                                  'https://www.btcboxex.com',
                                   style: pw.TextStyle(
                                     fontSize: 8,
                                     fontWeight: pw.FontWeight.normal,
@@ -184,8 +184,8 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                     ),
                   ),
                   pw.Positioned(
-                    right: 40, // 你可以根据需要调整位置
-                    top: 0, // 如果需要调整垂直位置
+                    right: 45, // 你可以根据需要调整位置
+                    top: 2, // 如果需要调整垂直位置
                     child: pw.Image(iconImage, height: 65),
                   ),
                 ],
@@ -234,7 +234,14 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                   child: pw.Row(
                     children: [
                       pw.Text(
-                        'COMPANY NAME : Next Technology Holding Inc.',
+                        'COMPANY NAME : ',
+                        style: pw.TextStyle(
+                          fontSize: 10,
+                          fontWeight: pw.FontWeight.normal,
+                        ),
+                      ),
+                      pw.Text(
+                        'Next Technology Holding Inc.',
                         style: pw.TextStyle(
                           fontSize: 10,
                           fontWeight: pw.FontWeight.normal,
