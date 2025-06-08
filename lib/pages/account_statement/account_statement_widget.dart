@@ -544,7 +544,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                     'There was no transactions involving this address in the selected period',
                     style: pw.TextStyle(
                       fontSize: 10,
-                      letterSpacing: 1.5,
+                      letterSpacing: 0.9,
                       fontWeight: pw.FontWeight.normal,
                     ),
                   ),
