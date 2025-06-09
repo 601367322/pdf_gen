@@ -1,0 +1,89 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "pdf_gen-main",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "pdf_gen-main (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "pdf_gen-main (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "B-Wallet",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor",
+                "bwallet",
+                "--dart-define=APP_FLAVOR=bwallet"
+            ]
+        },
+        {
+            "name": "B-Wallet (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "args": [
+                "--flavor",
+                "bwallet",
+                "--dart-define=APP_FLAVOR=bwallet"
+            ]
+        },
+        {
+            "name": "B-Wallet (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": [
+                "--flavor",
+                "bwallet",
+                "--dart-define=APP_FLAVOR=bwallet"
+            ]
+        },
+        {
+            "name": "BTCBOX",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--flavor",
+                "btcbox",
+                "--dart-define=APP_FLAVOR=btcbox"
+            ]
+        },
+        {
+            "name": "BTCBOX (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "args": [
+                "--flavor",
+                "btcbox",
+                "--dart-define=APP_FLAVOR=btcbox"
+            ]
+        },
+        {
+            "name": "BTCBOX (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": [
+                "--flavor",
+                "btcbox",
+                "--dart-define=APP_FLAVOR=btcbox"
+            ]
+        }
+    ]
+}

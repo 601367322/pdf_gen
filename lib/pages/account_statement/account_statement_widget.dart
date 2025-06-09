@@ -766,27 +766,27 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                         singleRecord: true,
                       ),
                       builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 40.0,
-                              height: 40.0,
-                              child: SpinKitPumpingHeart(
-                                color: FlutterFlowTheme.of(context).primary,
-                                size: 40.0,
-                              ),
-                            ),
-                          );
-                        }
-                        List<BudgetListRecord> buttonBudgetListRecordList =
-                            snapshot.data!;
-                        if (snapshot.data!.isEmpty) {
-                          return Container();
-                        }
-                        final buttonBudgetListRecord =
-                            buttonBudgetListRecordList.isNotEmpty
-                                ? buttonBudgetListRecordList.first
-                                : null;
+                        // if (!snapshot.hasData) {
+                        //   return Center(
+                        //     child: SizedBox(
+                        //       width: 40.0,
+                        //       height: 40.0,
+                        //       child: SpinKitPumpingHeart(
+                        //         color: FlutterFlowTheme.of(context).primary,
+                        //         size: 40.0,
+                        //       ),
+                        //     ),
+                        //   );
+                        // }
+                        // List<BudgetListRecord> buttonBudgetListRecordList =
+                        //     snapshot.data!;
+                        // if (snapshot.data!.isEmpty) {
+                        //   return Container();
+                        // }
+                        // final buttonBudgetListRecord =
+                        //     buttonBudgetListRecordList.isNotEmpty
+                        //         ? buttonBudgetListRecordList.first
+                        //         : null;
 
                         return FFButtonWidget(
                           onPressed: () async {

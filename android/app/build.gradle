@@ -33,6 +33,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     compileSdkVersion 34
+    namespace "com.flutterflow.finwallet"
     
 
     sourceSets {
@@ -51,6 +52,22 @@ android {
         targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+        bwallet {
+            dimension "default"
+            applicationId "com.flutterflow.finwallet"
+            namespace "com.flutterflow.finwallet"
+            resValue "string", "app_name", "B-Wallet"
+        }
+        btcbox {
+            dimension "default"
+            applicationId "com.flutterflow.finwallet1"
+            namespace "com.flutterflow.finwallet1"
+            resValue "string", "app_name", "BTCBOX"
+        }
     }
 
    signingConfigs {

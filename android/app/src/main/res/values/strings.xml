@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-    <string name="app_name">B-Wallet</string>
-
+    <!-- 应用名称现在通过build.gradle中的resValue为每个产品风味单独定义 -->
 </resources>

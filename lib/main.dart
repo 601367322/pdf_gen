@@ -1,6 +1,7 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
@@ -22,17 +23,22 @@ void main() async {
 
   await FlutterFlowTheme.initialize();
 
+  // 获取应用风格信息，这可以通过--dart-define参数传递
+  final String appFlavor = const String.fromEnvironment('APP_FLAVOR', defaultValue: 'bwallet');
+
   final appState = FFAppState(); // Initialize FFAppState
   await appState.initializePersistedState();
 
   runApp(ChangeNotifierProvider(
     create: (context) => appState,
-    child: const MyApp(),
+    child: MyApp(appFlavor: appFlavor),
   ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  final String appFlavor;
+  
+  const MyApp({super.key, this.appFlavor = 'bwallet'});
 
   // This widget is the root of your application.
   @override
@@ -92,7 +98,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'B-Wallet',
+      title: widget.appFlavor == 'bwallet' ? 'B-Wallet' : 'BTCBOX',
       localizationsDelegates: const [
         FFLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
