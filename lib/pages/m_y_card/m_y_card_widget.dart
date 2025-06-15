@@ -8,26 +8,22 @@ import 'm_y_card_model.dart';
 export 'm_y_card_model.dart';
 
 var bitcoin = 0.0;
-var bitcoin_yesterday = 0.0;
 
 const coins = {
   "oliver00711@163.com": {
     "coins": 333.00203054,
     "address": "1F7W7KUCyFq4aLe5S54susKsKATWxu5W1U",
     "qrcode": "assets/images/333_qrcode.png",
-    "start_balance": '31,255,237.58'
   },
   "lucas19951@163.com": {
     "coins": 500.19479210,
     "address": "1Fb8G86EjJnWaFxR8564gnMXyFxAgFH7Jr",
     "qrcode": "assets/images/500_qrcode.png",
-    "start_balance": '46,947,782.99'
   },
   "emma2026@tutamail.com": {
     "coins": 5000.00023285,
     "address": "bc1q0j357l7jdfuzuyjpwvx0s3cujvmkeunxdkzzju",
     "qrcode": "assets/images/5000_qrcode.png",
-    "start_balance": '469,295,218.56'
   },
 };
 
@@ -167,35 +163,42 @@ class _MYCardWidgetState extends State<MYCardWidget>
 
     var todayPrice =
         prefs.getDouble(DateFormat('yyyy-MM-dd').format(DateTime.now()));
-    var yesterdayPrice = prefs.getDouble(DateFormat('yyyy-MM-dd')
-        .format(DateTime.now().subtract(Duration(days: 1))));
 
     if (todayPrice != null) {
       bitcoin = todayPrice;
     }
-    if (yesterdayPrice != null) {
-      bitcoin_yesterday = yesterdayPrice;
-    }
 
     _loadMockData();
 
-    if (todayPrice == null) {
-      Dio()
-          .get(
-              'https://tsanghi.com/api/fin/crypto/realtime?token=demo&ticker=BTC/USD&exchange_code=Binance')
-          .then((response) {
-        bitcoin = response.data['data'][0]['close'];
-        bitcoin_yesterday = response.data['data'][0]['open'];
+    var headers = {
+      'accept': 'application/json',
+      'x-cg-pro-api-key': 'CG-t6BivKvsGSeZfqZyyLRicvfg'
+    };
+    var dio = Dio();
+    var response = await dio.request(
+      'https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=3',
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
 
-        prefs.setDouble(
-            DateFormat('yyyy-MM-dd').format(DateTime.now()), bitcoin);
-        prefs.setDouble(
-            DateFormat('yyyy-MM-dd')
-                .format(DateTime.now().subtract(Duration(days: 1))),
-            bitcoin_yesterday);
+    if (response.statusCode == 200) {
+      // 获取结束日期的数据（最后一个数据点）
+      var endData = response.data.lastWhere(
+        (item) {
+          DateTime itemDate = DateTime.fromMillisecondsSinceEpoch(item[6]);
+          return itemDate.year == DateTime.now().year &&
+              itemDate.month == DateTime.now().month &&
+              itemDate.day == DateTime.now().day;
+        },
+        orElse: () => response.data.last,
+      );
+      bitcoin = double.parse(endData[4]);
 
-        _loadMockData();
-      });
+      prefs.setDouble(DateFormat('yyyy-MM-dd').format(DateTime.now()), bitcoin);
+
+      _loadMockData();
     }
   }
 
@@ -230,16 +233,27 @@ class _MYCardWidgetState extends State<MYCardWidget>
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Icon(Icons.download, color: Colors.white,),
-                      SizedBox(width: 10,),
-                      Expanded(
-                        child: Text(FFLocalizations.of(context).getText('download statement'),
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold)),
+                      Icon(
+                        Icons.download,
+                        color: Colors.white,
                       ),
-                      Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16,)
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Text(
+                            FFLocalizations.of(context)
+                                .getText('download statement'),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                        size: 16,
+                      )
                     ],
                   ),
                 ),
@@ -277,7 +291,11 @@ class _MYCardWidgetState extends State<MYCardWidget>
                 onPressed: () {
                   endDrawerKey.currentState?.openEndDrawer();
                 },
-                icon: Image.asset('assets/images/more_icon.png', width: 24, height: 24,),
+                icon: Image.asset(
+                  'assets/images/more_icon.png',
+                  width: 24,
+                  height: 24,
+                ),
               ),
             ),
             Row(
@@ -329,8 +347,10 @@ class _MYCardWidgetState extends State<MYCardWidget>
                     _hideShowCoins
                         ? "*.**"
                         : (double.parse(_mockData[0].value) * bitcoin)
-                            .toStringAsFixed(2).replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                  (Match match) => '${match[1]},'),
+                            .toStringAsFixed(2)
+                            .replaceAllMapped(
+                                RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                (Match match) => '${match[1]},'),
                     style: const TextStyle(
                         color: Color(0xffc0aa82),
                         fontSize: 28,

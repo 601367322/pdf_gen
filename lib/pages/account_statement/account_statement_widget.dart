@@ -353,7 +353,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                           child: pw.Container(
                               alignment: pw.Alignment.centerRight,
                               child: pw.Text(
-                                '${bitcoinData[0].priceUsd}  USD',
+                                '${bitcoinData[0].startBalance}  USD',
                                 style: pw.TextStyle(
                                   fontSize: 8,
                                   letterSpacing: 1.5,
@@ -404,7 +404,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                           child: pw.Container(
                               alignment: pw.Alignment.centerRight,
                               child: pw.Text(
-                                '${bitcoinData[0].startBalance}  USD',
+                                '${bitcoinData[0].endBalance}  USD',
                                 style: pw.TextStyle(
                                   fontSize: 8,
                                   letterSpacing: 1.5,
