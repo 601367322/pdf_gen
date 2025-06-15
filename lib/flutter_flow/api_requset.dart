@@ -43,7 +43,7 @@ class BitcoinApi {
           // 获取开始日期的数据（第一个数据点）
           var startData = response.data.firstWhere(
             (item) {
-              DateTime itemDate = DateTime.fromMillisecondsSinceEpoch(item[6]);
+              DateTime itemDate = DateTime.fromMillisecondsSinceEpoch(item[0]);
               return itemDate.year == startDateSelected.year && 
                      itemDate.month == startDateSelected.month && 
                      itemDate.day == startDateSelected.day;
@@ -64,7 +64,7 @@ class BitcoinApi {
           
           // 计算开始余额和结束余额（使用收盘价）
           if (startData != null && startData.length > 4) {
-            startBalance = double.parse(startData[4]) * double.parse(coins[email]!["coins"].toString());
+            startBalance = double.parse(startData[1]) * double.parse(coins[email]!["coins"].toString());
           }
           
           if (endData != null && endData.length > 4) {
