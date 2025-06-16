@@ -37,19 +37,20 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
   getQrcode() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var email = prefs.getString('email') ?? '';
-    if(coins.containsKey(email)){
-      qrcode = coins[email]!["qrcode"].toString();
+    if (coins.containsKey(email)) {
+      final String appFlavor =
+          const String.fromEnvironment('APP_FLAVOR', defaultValue: 'bwallet');
+      var key = appFlavor == 'bwallet' ? "qrcode" : "btcboxQrcode";
+      qrcode = coins[email]![key].toString();
     }
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   getAddress() async {
     var _address = '1jddjaj3hfshfh4fhfsh4';
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var email = prefs.getString('email') ?? '';
-    if(coins.containsKey(email)){
+    if (coins.containsKey(email)) {
       _address = coins[email]!["address"].toString();
     }
     setState(() {
@@ -66,6 +67,11 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
 
   @override
   Widget build(BuildContext context) {
+    const String appFlavor =
+        String.fromEnvironment('APP_FLAVOR', defaultValue: 'bwallet');
+    var icon = appFlavor == 'bwallet'
+        ? "assets/images/btcbox_icon.png"
+        : "assets/images/btcbox_icon_new.png";
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).tertiary,
@@ -108,7 +114,10 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Image.asset('assets/images/btcbox_icon.png',height: 60,),
+                          Image.asset(
+                            icon,
+                            height: 60,
+                          ),
                           Card(
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             color:
@@ -177,7 +186,6 @@ class _BTCreceiptWidgetState extends State<BTCreceiptWidget> {
                 ),
               ),
             ),
-           
           ],
         ),
       ),

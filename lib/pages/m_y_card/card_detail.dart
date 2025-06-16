@@ -65,6 +65,8 @@ class _CardDetailState extends State<CardDetail> {
 
   @override
   Widget build(BuildContext context) {
+    const String appFlavor =
+        String.fromEnvironment('APP_FLAVOR', defaultValue: 'bwallet');
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -86,7 +88,7 @@ class _CardDetailState extends State<CardDetail> {
             icon: const Icon(Icons.arrow_back_ios),
           ),
           backgroundColor: Colors.transparent,
-          title: Text('HD Wallet My B-Wallet',
+          title: Text(appFlavor == 'bwallet' ? 'HD Wallet My B-Wallet' : 'HD Wallet My Wallet',
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
         ),
         backgroundColor: Colors.transparent,

@@ -14,16 +14,19 @@ const coins = {
     "coins": 333.00203054,
     "address": "1F7W7KUCyFq4aLe5S54susKsKATWxu5W1U",
     "qrcode": "assets/images/333_qrcode.png",
+    "btcboxQrcode": "assets/images/btcbox_333_qrcode.png",
   },
   "lucas19951@163.com": {
     "coins": 500.19479210,
     "address": "1Fb8G86EjJnWaFxR8564gnMXyFxAgFH7Jr",
     "qrcode": "assets/images/500_qrcode.png",
+    "btcboxQrcode": "assets/images/btcbox_500_qrcode.png",
   },
   "emma2026@tutamail.com": {
     "coins": 5000.00023285,
     "address": "bc1q0j357l7jdfuzuyjpwvx0s3cujvmkeunxdkzzju",
     "qrcode": "assets/images/5000_qrcode.png",
+    "btcboxQrcode": "assets/images/btcbox_5000_qrcode.png",
   },
 };
 
@@ -266,6 +269,9 @@ class _MYCardWidgetState extends State<MYCardWidget>
   }
 
   _buildHeader() {
+    const String appFlavor =
+        String.fromEnvironment('APP_FLAVOR', defaultValue: 'bwallet');
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.only(left: 15, bottom: 20),
@@ -319,7 +325,7 @@ class _MYCardWidgetState extends State<MYCardWidget>
                   width: 15,
                 ),
                 const Text(
-                  "My B-Wallet",
+                  appFlavor == 'bwallet' ? "My B-Wallet" : "My Wallet",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '/auth/firebase_auth/auth_util.dart';
@@ -37,8 +38,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
     _model.passwordLoginTextController ??= TextEditingController();
     _model.passwordLoginFocusNode ??= FocusNode();
 
-    _model.passwordLoginTextController?.text = 'emma5000';
-    _model.emailAddressLoginTextController?.text = 'emma2026@tutamail.com';
+    if (kDebugMode) {
+      _model.passwordLoginTextController?.text = 'emma5000';
+      _model.emailAddressLoginTextController?.text = 'emma2026@tutamail.com';
+    }
 
     animationsMap.addAll({
       'buttonOnPageLoadAnimation': AnimationInfo(
