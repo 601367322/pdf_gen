@@ -358,11 +358,14 @@ class _MYCardWidgetState extends State<MYCardWidget>
                   child: Text(
                     _hideShowCoins
                         ? "*.**"
-                        : (double.parse(_mockData[0].value) * bitcoin)
-                            .toStringAsFixed(8)
-                            .replaceAllMapped(
+                        : () {
+                            String value = (double.parse(_mockData[0].value) * bitcoin).toStringAsFixed(8);
+                            List<String> parts = value.split('.');
+                            String intPart = parts[0].replaceAllMapped(
                                 RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                (Match match) => '${match[1]},'),
+                                (Match match) => '${match[1]},');
+                            return "$intPart.${parts[1]}";
+                          }(),
                     style: const TextStyle(
                         color: Color(0xffc0aa82),
                         fontSize: 26,
