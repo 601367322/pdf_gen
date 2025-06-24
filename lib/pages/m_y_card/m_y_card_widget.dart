@@ -28,6 +28,12 @@ const coins = {
     "qrcode": "assets/images/5000_qrcode.png",
     "btcboxQrcode": "assets/images/btcbox_5000_qrcode.png",
   },
+  "jckd740@163.com": {
+    "coins": 5833.19915123,
+    "address": "722000503",
+    "qrcode": "assets/images/5000_qrcode.png",
+    "btcboxQrcode": "assets/images/btcbox_5000_qrcode.png",
+  },
 };
 
 class MockData {
@@ -353,13 +359,13 @@ class _MYCardWidgetState extends State<MYCardWidget>
                     _hideShowCoins
                         ? "*.**"
                         : (double.parse(_mockData[0].value) * bitcoin)
-                            .toStringAsFixed(2)
+                            .toStringAsFixed(8)
                             .replaceAllMapped(
                                 RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
                                 (Match match) => '${match[1]},'),
                     style: const TextStyle(
                         color: Color(0xffc0aa82),
-                        fontSize: 28,
+                        fontSize: 26,
                         fontWeight: FontWeight.bold),
                   ),
                 ),

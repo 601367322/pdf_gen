@@ -614,7 +614,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
             pw.SizedBox(height: 10),
             // Eighth Row: USD Rate at the Time of Transaction
             pw.Text(
-              'THIS RECEIPT HAS GENERATED AUTOMATICALLY ON ${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now())} (UTC) AND IS BASED ON PUBLIC DATA FROM THEBITCOIN BLOCKCHAIN',
+              'THIS RECEIPT HAS GENERATED AUTOMATICALLY ON ${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now())} (UTC) AND IS BASED ON PUBLIC DATA FROM THE BITCOIN BLOCKCHAIN',
               style: pw.TextStyle(
                 fontSize: 7,
                 letterSpacing: 1.5,
