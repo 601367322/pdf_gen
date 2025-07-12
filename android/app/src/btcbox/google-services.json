@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "884634667362",
-    "project_id": "btcbox-eda3b",
-    "storage_bucket": "btcbox-eda3b.firebasestorage.app"
+    "project_number": "310003039444",
+    "project_id": "bitbox-869ce",
+    "storage_bucket": "bitbox-869ce.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:884634667362:android:df957e6b2336fa5946843b",
+        "mobilesdk_app_id": "1:310003039444:android:c9fbfe2e77895d2c064f41",
         "android_client_info": {
           "package_name": "com.flutterflow.finwallet1"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAlQdjbc29pKSvTIf_eqo73_LbeG0960_4"
+          "current_key": "AIzaSyBiq4uOdpno-qE0-Vi0XkGEJMxkCA--cR4"
         }
       ],
       "services": {
