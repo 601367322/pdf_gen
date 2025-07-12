@@ -138,9 +138,18 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       ),
                       child: Image.network(
                         valueOrDefault<String>(
-                          editProfileUsersRecord.photoUrl,
+                          editProfileUsersRecord.photoUrl.isNotEmpty
+                              ? editProfileUsersRecord.photoUrl
+                              : null,
                           'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/finance-app-sample-kugwu4/assets/ijvuhvqbvns6/uiAvatar@2x.png',
                         ),
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.network(
+                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/finance-app-sample-kugwu4/assets/ijvuhvqbvns6/uiAvatar@2x.png',
+                            fit: BoxFit.cover,
+                          );
+                        },
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -161,11 +170,13 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
 
                           var downloadUrls = <String>[];
                           try {
-                            showUploadMessage(
-                              context,
-                              'Uploading file...',
-                              showLoading: true,
-                            );
+                            if (context.mounted) {
+                              showUploadMessage(
+                                context,
+                                'Uploading file...',
+                                showLoading: true,
+                              );
+                            }
                             selectedUploadedFiles = selectedMedia
                                 .map((m) => FFUploadedFile(
                                       name: m.storagePath.split('/').last,
@@ -186,7 +197,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 .map((u) => u!)
                                 .toList();
                           } finally {
-                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            }
                             _model.isDataUploading = false;
                           }
                           if (selectedUploadedFiles.length ==
@@ -197,10 +210,14 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   selectedUploadedFiles.first;
                               _model.uploadedFileUrl = downloadUrls.first;
                             });
-                            showUploadMessage(context, 'Success!');
+                            if (context.mounted) {
+                              showUploadMessage(context, 'Success!');
+                            }
                           } else {
                             safeSetState(() {});
-                            showUploadMessage(context, 'Failed to upload data');
+                            if (context.mounted) {
+                              showUploadMessage(context, 'Failed to upload data');
+                            }
                             return;
                           }
                         }
@@ -510,8 +527,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        await editProfileUsersRecord.reference
-                            .update(createUsersRecordData(
+                        // Create the update data
+                        final updateData = createUsersRecordData(
                           displayName: _model.yourNameTextController.text,
                           email: _model.yourEmailTextController.text,
                           age: int.tryParse(_model.yourAgeTextController.text),
@@ -519,9 +536,20 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             _model.yourTitleTextController.text,
                             'Badass Geek',
                           ),
-                          photoUrl: _model.uploadedFileUrl,
-                        ));
-                        context.pop();
+                          // Only update photoUrl if a new photo was uploaded
+                          photoUrl: _model.uploadedFileUrl.isNotEmpty
+                              ? _model.uploadedFileUrl
+                              : null,
+                        );
+
+                        // Remove null values to avoid overwriting existing photoUrl with null
+                        final filteredUpdateData = Map<String, dynamic>.from(updateData)
+                          ..removeWhere((key, value) => value == null);
+
+                        await editProfileUsersRecord.reference.update(filteredUpdateData);
+                        if (context.mounted) {
+                          context.pop();
+                        }
                       },
                       text: FFLocalizations.of(context).getText(
                         'i6edcl52' /* Save Changes */,

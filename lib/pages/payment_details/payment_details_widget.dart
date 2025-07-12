@@ -418,10 +418,16 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                                             fadeOutDuration:
                                                 const Duration(milliseconds: 500),
                                             imageUrl: valueOrDefault<String>(
-                                              containerUsersRecord.photoUrl,
+                                              containerUsersRecord.photoUrl.isNotEmpty
+                                                  ? containerUsersRecord.photoUrl
+                                                  : null,
                                               'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sample-app-e-comm-3oxq8y/assets/hszmaloprc7a/Mia%20Deaven.jpg',
                                             ),
                                             fit: BoxFit.fitWidth,
+                                            errorWidget: (context, url, error) => Image.network(
+                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sample-app-e-comm-3oxq8y/assets/hszmaloprc7a/Mia%20Deaven.jpg',
+                                              fit: BoxFit.fitWidth,
+                                            ),
                                           ),
                                         ),
                                       ),

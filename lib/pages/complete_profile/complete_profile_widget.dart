@@ -333,9 +333,18 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                       ),
                       child: Image.network(
                         valueOrDefault<String>(
-                          _model.uploadedFileUrl,
+                          _model.uploadedFileUrl.isNotEmpty
+                              ? _model.uploadedFileUrl
+                              : null,
                           'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/finance-app-sample-kugwu4/assets/ijvuhvqbvns6/uiAvatar@2x.png',
                         ),
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.network(
+                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/finance-app-sample-kugwu4/assets/ijvuhvqbvns6/uiAvatar@2x.png',
+                            fit: BoxFit.cover,
+                          );
+                        },
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ).animateOnPageLoad(
