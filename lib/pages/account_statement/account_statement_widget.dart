@@ -259,7 +259,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                   child: pw.Row(
                     children: [
                       pw.Text(
-                        'WALLET ADDRESS:',
+                        'ACCOUNT NUMBER:',
                         style: pw.TextStyle(
                             fontSize: 10, fontWeight: pw.FontWeight.normal),
                       ),
@@ -267,9 +267,8 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                       pw.Text(
                         address,
                         style: pw.TextStyle(
-                            fontSize: 8,
-                            fontWeight: pw.FontWeight.normal,
-                            color: const PdfColor.fromInt(0x5d5b97)),
+                            fontSize: 10,
+                            fontWeight: pw.FontWeight.normal,),
                       ),
                     ],
                   ),
