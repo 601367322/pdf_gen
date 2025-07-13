@@ -138,9 +138,12 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       ),
                       child: Image.network(
                         valueOrDefault<String>(
-                          editProfileUsersRecord.photoUrl.isNotEmpty
-                              ? editProfileUsersRecord.photoUrl
-                              : null,
+                          // 优先显示新上传的头像，如果没有则显示原有头像
+                          _model.uploadedFileUrl.isNotEmpty
+                              ? _model.uploadedFileUrl
+                              : (editProfileUsersRecord.photoUrl.isNotEmpty
+                                  ? editProfileUsersRecord.photoUrl
+                                  : null),
                           'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/finance-app-sample-kugwu4/assets/ijvuhvqbvns6/uiAvatar@2x.png',
                         ),
                         errorBuilder: (context, error, stackTrace) {

@@ -124,9 +124,21 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                     ),
-                                    child: Image.asset(
-                                      'assets/images/avatar.png',
-                                    ),
+                                    child: mYProfilePageUsersRecord.photoUrl.isNotEmpty
+                                        ? Image.network(
+                                            mYProfilePageUsersRecord.photoUrl,
+                                            fit: BoxFit.cover,
+                                            errorBuilder: (context, error, stackTrace) {
+                                              return Image.asset(
+                                                'assets/images/avatar.png',
+                                                fit: BoxFit.cover,
+                                              );
+                                            },
+                                          )
+                                        : Image.asset(
+                                            'assets/images/avatar.png',
+                                            fit: BoxFit.cover,
+                                          ),
                                   ),
                                 ),
                               ),

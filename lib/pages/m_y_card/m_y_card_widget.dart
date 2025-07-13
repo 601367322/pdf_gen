@@ -2,8 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:nxtt_wallet/pages/m_y_card/card_detail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'm_y_card_model.dart';
 export 'm_y_card_model.dart';
 
@@ -218,63 +221,80 @@ class _MYCardWidgetState extends State<MYCardWidget>
         child: CircularProgressIndicator(),
       );
     }
-    return Scaffold(
-      key: endDrawerKey,
-      backgroundColor: Color(0xff2e2f3a),
-      body: Column(
-        children: [
-          _buildHeader(),
-          _buildBody(),
-        ],
-      ),
-      endDrawer: Container(
-        color: Color(0xff2e2f3a),
-        width: MediaQuery.of(context).size.width * 0.5,
-        child: SafeArea(
-          top: true,
-          child: Column(
+    return StreamBuilder<UsersRecord>(
+      stream: UsersRecord.getDocument(currentUserReference!),
+      builder: (context, snapshot) {
+        // 如果没有用户数据，显示加载状态
+        if (!snapshot.hasData) {
+          return Scaffold(
+            backgroundColor: Color(0xff2e2f3a),
+            body: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+
+        final userRecord = snapshot.data!;
+
+        return Scaffold(
+          key: endDrawerKey,
+          backgroundColor: Color(0xff2e2f3a),
+          body: Column(
             children: [
-              InkWell(
-                onTap: () {
-                  context.pushNamed('AccountStatement');
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.download,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: Text(
-                            FFLocalizations.of(context)
-                                .getText('download statement'),
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.white,
-                        size: 16,
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              _buildHeader(userRecord),
+              _buildBody(),
             ],
           ),
-        ),
-      ),
+          endDrawer: Container(
+            color: Color(0xff2e2f3a),
+            width: MediaQuery.of(context).size.width * 0.5,
+            child: SafeArea(
+              top: true,
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      context.pushNamed('AccountStatement');
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.download,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Text(
+                                FFLocalizations.of(context)
+                                    .getText('download statement'),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.white,
+                            size: 16,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
-  _buildHeader() {
+  _buildHeader(UsersRecord userRecord) {
     const String appFlavor =
         String.fromEnvironment('APP_FLAVOR', defaultValue: 'bwallet');
 
@@ -320,11 +340,27 @@ class _MYCardWidgetState extends State<MYCardWidget>
                     shape: BoxShape.circle,
                   ),
                   child: ClipOval(
-                    child: Image.asset(
-                      'assets/images/avatar.png',
-                      width: 80,
-                      height: 80,
-                    ),
+                    child: userRecord.photoUrl.isNotEmpty
+                        ? Image.network(
+                            userRecord.photoUrl,
+                            width: 80,
+                            height: 80,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                'assets/images/avatar.png',
+                                width: 80,
+                                height: 80,
+                                fit: BoxFit.cover,
+                              );
+                            },
+                          )
+                        : Image.asset(
+                            'assets/images/avatar.png',
+                            width: 80,
+                            height: 80,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
                 const SizedBox(
