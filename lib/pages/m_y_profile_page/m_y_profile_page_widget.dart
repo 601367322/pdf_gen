@@ -134,10 +134,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                               height: 60.0,
                                               color: Colors.grey[300],
                                               child: const Center(
-                                                child: CircularProgressIndicator(
-                                                  strokeWidth: 2,
-                                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
-                                                ),
+                                                child: SizedBox(),
                                               ),
                                             ),
                                             errorWidget: (context, url, error) => Image.asset(

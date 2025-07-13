@@ -153,10 +153,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           height: 80.0,
                           color: Colors.grey[300],
                           child: const Center(
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
-                            ),
+                           child: SizedBox(),
                           ),
                         ),
                         errorWidget: (context, url, error) => CachedNetworkImage(

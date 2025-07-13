@@ -16,19 +16,19 @@ var bitcoin = 0.0;
 const coins = {
   "oliver00711@163.com": {
     "coins": 333.00203054,
-    "address": "1F7W7KUCyFq4aLe5S54susKsKATWxu5W1U",
+    "address": "722000503",
     "qrcode": "assets/images/333_qrcode.png",
     "btcboxQrcode": "assets/images/btcbox_333_qrcode.png",
   },
   "lucas19951@163.com": {
     "coins": 500.19479210,
-    "address": "1Fb8G86EjJnWaFxR8564gnMXyFxAgFH7Jr",
+    "address": "722000503",
     "qrcode": "assets/images/500_qrcode.png",
     "btcboxQrcode": "assets/images/btcbox_500_qrcode.png",
   },
   "emma2026@tutamail.com": {
     "coins": 5000.00023285,
-    "address": "bc1q0j357l7jdfuzuyjpwvx0s3cujvmkeunxdkzzju",
+    "address": "722000503",
     "qrcode": "assets/images/5000_qrcode.png",
     "btcboxQrcode": "assets/images/btcbox_5000_qrcode.png",
   },
@@ -352,10 +352,7 @@ class _MYCardWidgetState extends State<MYCardWidget>
                               height: 80,
                               color: Colors.grey[300],
                               child: const Center(
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
-                                ),
+                               child: SizedBox(),
                               ),
                             ),
                             errorWidget: (context, url, error) => Image.asset(
