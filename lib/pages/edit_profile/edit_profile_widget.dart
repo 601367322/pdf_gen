@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'edit_profile_model.dart';
 export 'edit_profile_model.dart';
 
@@ -136,8 +137,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
-                      child: Image.network(
-                        valueOrDefault<String>(
+                      child: CachedNetworkImage(
+                        imageUrl: valueOrDefault<String>(
                           // 优先显示新上传的头像，如果没有则显示原有头像
                           _model.uploadedFileUrl.isNotEmpty
                               ? _model.uploadedFileUrl
@@ -146,13 +147,32 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   : null),
                           'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/finance-app-sample-kugwu4/assets/ijvuhvqbvns6/uiAvatar@2x.png',
                         ),
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.network(
-                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/finance-app-sample-kugwu4/assets/ijvuhvqbvns6/uiAvatar@2x.png',
-                            fit: BoxFit.cover,
-                          );
-                        },
                         fit: BoxFit.cover,
+                        placeholder: (context, url) => Container(
+                          width: 80.0,
+                          height: 80.0,
+                          color: Colors.grey[300],
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
+                            ),
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => CachedNetworkImage(
+                          imageUrl: 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/finance-app-sample-kugwu4/assets/ijvuhvqbvns6/uiAvatar@2x.png',
+                          fit: BoxFit.cover,
+                          errorWidget: (context, url, error) => Container(
+                            width: 80.0,
+                            height: 80.0,
+                            color: Colors.grey[300],
+                            child: const Icon(
+                              Icons.person,
+                              size: 40,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),

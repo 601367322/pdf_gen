@@ -7,6 +7,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'm_y_card_model.dart';
 export 'm_y_card_model.dart';
 
@@ -341,19 +342,28 @@ class _MYCardWidgetState extends State<MYCardWidget>
                   ),
                   child: ClipOval(
                     child: userRecord.photoUrl.isNotEmpty
-                        ? Image.network(
-                            userRecord.photoUrl,
+                        ? CachedNetworkImage(
+                            imageUrl: userRecord.photoUrl,
                             width: 80,
                             height: 80,
                             fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Image.asset(
-                                'assets/images/avatar.png',
-                                width: 80,
-                                height: 80,
-                                fit: BoxFit.cover,
-                              );
-                            },
+                            placeholder: (context, url) => Container(
+                              width: 80,
+                              height: 80,
+                              color: Colors.grey[300],
+                              child: const Center(
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
+                                ),
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => Image.asset(
+                              'assets/images/avatar.png',
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.cover,
+                            ),
                           )
                         : Image.asset(
                             'assets/images/avatar.png',

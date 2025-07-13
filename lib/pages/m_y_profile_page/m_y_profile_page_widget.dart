@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'm_y_profile_page_model.dart';
 export 'm_y_profile_page_model.dart';
 
@@ -125,15 +126,24 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                       shape: BoxShape.circle,
                                     ),
                                     child: mYProfilePageUsersRecord.photoUrl.isNotEmpty
-                                        ? Image.network(
-                                            mYProfilePageUsersRecord.photoUrl,
+                                        ? CachedNetworkImage(
+                                            imageUrl: mYProfilePageUsersRecord.photoUrl,
                                             fit: BoxFit.cover,
-                                            errorBuilder: (context, error, stackTrace) {
-                                              return Image.asset(
-                                                'assets/images/avatar.png',
-                                                fit: BoxFit.cover,
-                                              );
-                                            },
+                                            placeholder: (context, url) => Container(
+                                              width: 60.0,
+                                              height: 60.0,
+                                              color: Colors.grey[300],
+                                              child: const Center(
+                                                child: CircularProgressIndicator(
+                                                  strokeWidth: 2,
+                                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
+                                                ),
+                                              ),
+                                            ),
+                                            errorWidget: (context, url, error) => Image.asset(
+                                              'assets/images/avatar.png',
+                                              fit: BoxFit.cover,
+                                            ),
                                           )
                                         : Image.asset(
                                             'assets/images/avatar.png',
