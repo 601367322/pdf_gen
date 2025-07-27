@@ -49,6 +49,10 @@ cp 下载的google-services.json android/app/src/btcbox/google-services.json
 ./build_variants.sh btcbox
 ```
 
+# 构建BTCBOX0727版本
+./build_variants.sh btcbox0727
+```
+
 ## 注意事项
 
 1. 确保已经将脚本设为可执行：
@@ -69,6 +73,12 @@ chmod +x build_variants.sh
      - 命名空间: com.flutterflow.finwallet1
      - 图标: ic_launcher1.png (已重命名为ic_launcher.png)
 
+  - **BTCBOX0727**:
+     - 应用名称: BTCBOX
+     - 应用ID: com.flutterflow.finwallet2
+     - 命名空间: com.flutterflow.finwallet2
+     - 图标: ic_launcher1.png (已重命名为ic_launcher.png)
+
 3. Firebase配置：
    - 如果您使用Firebase服务，必须为每个包名在Firebase控制台创建单独的应用
    - 每个应用需要下载对应的`google-services.json`文件并放置在正确的目录中
@@ -85,3 +95,7 @@ flutter run --flavor bwallet --dart-define=APP_FLAVOR=bwallet
 # 调试BTCBOX版本
 flutter run --flavor btcbox --dart-define=APP_FLAVOR=btcbox
 ``` 
+
+# 调试BTCBOX0727版本
+flutter run --flavor btcbox0727 --dart-define=APP_FLAVOR=btcbox0727
+```

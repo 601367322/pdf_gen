@@ -68,6 +68,12 @@ android {
             namespace "com.flutterflow.finwallet1"
             resValue "string", "app_name", "BTCBOX"
         }
+        btcbox0727 {
+            dimension "default"
+            applicationId "com.flutterflow.finwallet2"
+            namespace "com.flutterflow.finwallet2"
+            resValue "string", "app_name", "BTCBOX"
+        }
     }
 
    signingConfigs {

@@ -34,13 +34,21 @@ case "$1" in
     flutter build apk --flavor btcbox --dart-define=APP_FLAVOR=btcbox -t lib/main.dart
     echo "构建完成! APK 位于: build/app/outputs/flutter-apk/app-btcbox-release.apk"
     ;;
+  "btcbox0727")
+    echo "构建 BTCBOX0727 版本..."
+    check_firebase_config "btcbox0727"
+    flutter build apk --flavor btcbox0727 --dart-define=APP_FLAVOR=btcbox0727 -t lib/main.dart
+    echo "构建完成! APK 位于: build/app/outputs/flutter-apk/app-btcbox0727-release.apk"
+    ;;
   *)
-    echo "使用方法: ./build_variants.sh [bwallet|btcbox]"
+    echo "使用方法: ./build_variants.sh [bwallet|btcbox|btcbox0727]"
     echo "  bwallet - 构建 B-Wallet 应用"
     echo "  btcbox  - 构建 BTCBOX 应用"
+    echo "  btcbox0727 - 构建 BTCBOX0727 应用"
     echo ""
     echo "注意: 每个产品风味需要对应的Firebase配置文件"
     echo "  - B-Wallet: android/app/src/bwallet/google-services.json"
     echo "  - BTCBOX: android/app/src/btcbox/google-services.json"
+    echo "  - BTCBOX0727: android/app/src/btcbox0727/google-services.json"
     ;;
 esac 
