@@ -84,6 +84,17 @@
                 "btcbox",
                 "--dart-define=APP_FLAVOR=btcbox"
             ]
+        },
+        {
+            "name": "BTCBOX0727",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "--flavor",
+                "btcbox0727",
+                "--dart-define=APP_FLAVOR=btcbox0727"
+            ]
         }
     ]
 }

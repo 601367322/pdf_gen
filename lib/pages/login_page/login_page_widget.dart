@@ -40,7 +40,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget>
 
     if (kDebugMode) {
       _model.passwordLoginTextController?.text = 'Jeke2025';
-      _model.emailAddressLoginTextController?.text = 'jckd740@163.com';
+      _model.emailAddressLoginTextController?.text = 'ecio551@163.com';
     }
 
     animationsMap.addAll({
