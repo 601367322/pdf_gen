@@ -90,7 +90,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
     final iconImageBytes = await _loadImage('assets/images/icon_image.png');
     final iconImage = pw.MemoryImage(iconImageBytes);
 
-    var address = '1jddjaj3hfshfh4fhfsh4';
+    var address = '62532102';
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var email = prefs.getString('email') ?? '';
     if (coins.containsKey(email)) {
@@ -241,7 +241,7 @@ class _AccountStatementWidgetState extends State<AccountStatementWidget>
                         ),
                       ),
                       pw.Text(
-                        'Next Technology Holding Inc.',
+                        'Pallas Capital Holding Ltd',
                         style: pw.TextStyle(
                           fontSize: 10,
                           fontWeight: pw.FontWeight.normal,
